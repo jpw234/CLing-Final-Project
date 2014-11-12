@@ -1,0 +1,33 @@
+Stages of the project pipeline:
+
+Stage 1: Convert from English-language sentences to trees accepted by the Lambda calculator
+	- Requires grammar finalized and semantic definitions set
+
+Stage 2: Convert from Lambda calculator output to AST nodes
+	- Requires the AST classes to be developed and a parser
+
+Stage 3: Convert from AST to Java
+	- Requires a pretty-printer that accepts a Program node and prints to screen/output file
+
+
+
+Individual requirements:
+
+Define the grammar for the Java subset that we're targeting
+Create the AST framework
+Create semantic definitions for English words we allow
+Stage 1 parser that takes in English and outputs a tree
+Stage 2 parser that takes in LC output and outputs AST nodes
+Pretty-printer for the AST
+
+Target functionality:
+Start basic - ints, bools, Strings, if/while
+Next level - doubles, floats, calls to String functions, for loops?
+Ambitious - object instantiation/method access
+Probably not - function declaration?
+
+Seems like this is just additive - if we start on the most basic level, we won't need to go back and make many changes when we're upgrading, just add on additional functionality - so I would propose that we start with the most basic, test it and make sure it fully works, and then progress
+
+Extensions:
+Going backwards - Java to English?
+Other languages - English to Python? C++?
