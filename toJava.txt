@@ -53,7 +53,7 @@ define remainder: Lp[mod(p)]
 
 define increment: Lx[add(N1,x)]
 define decrement: Lx[subtract(N1,x)]
-#if want to keep negative numbers then need
+#if want to do operators on negative numbers then need
 #the complex multiple operator expressions below
 define negative: Lx[negative(x)]
 
@@ -63,6 +63,9 @@ define set-t:LxLp[assign(x,p)]
 #this because then operator precedence ambiguity
 #eg "divide two by x times three" could be (2/x)*3 
 #but the person may have meant 2/(x*3) or vice versa
+#actually these are very useful for operations on doubles!
+#so keep these definitions but still don't want to
+#allow more than 1 operation at a time
 define multiply-t: LxLp[multiply(x,p)]
 define times-t: LxLp[multiply(x,p)] 
 define divide-t:LxLp[divide(x,p)]
