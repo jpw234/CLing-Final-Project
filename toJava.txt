@@ -1,0 +1,185 @@
+Words as models
+
+# Constants for positions.
+constants of type e : N1 N2 N3 N4 N5 N6 N7 N8 N9 N10 N22 X B True False 
+#in future may represent numbers like this
+# The adjacency relation.
+constants of type <e*e,t> : D
+# C(N3) is not needed for java
+constants of type <e,e> : C
+#may not need as many
+variables of type e : x y z
+variables of type <e,t> : P-Q
+variables of type t : p q
+variables of type <e,et> : R
+variables of type <et,t> : T
+variables of type <<et,t>,e> : W
+variables of type <<e,et>,et> : S
+
+#variables of type <<e,et>,t>: J
+#variables of type <e,<<e,et>,t>>: I
+#no work
+variables of type <e,<e,<<e,et>,t>>> : O
+#variables of type <e,<e<<e,e>,t>>> : O
+
+multiple letter identifiers
+
+use rule function application
+use rule non-branching nodes
+use rule predicate modification
+use rule lambda abstraction
+
+#simple
+define set: LxLy[assign(x,y)]
+define multiply: LxLy[multiply(x,y)]
+define times: LxLy[multiply(x,y)] 
+define divide: LxLy[divide(x,y)]
+define divided: LxLy[divide(x,y)]
+define twice: Lx [multiply(N2,x)]
+#for add one to x so 1+x
+define add:LxLy[add(x,y)]
+#for set x to y plus z so x= y+z
+define plus: LxLy [add(x,y)]
+# subtract 3 from x so x-3
+define subtract: LxLy [subtract(x,y)]
+#x minus y
+define minus:LxLy[subtract(x,y)]
+#x is greater than 3 --> x is greater(y,N3)-->greater(x,N3)
+define greater:LxLy[greater(y,x)]
+define less:LxLy [less(y,x)]
+define equal:LxLy[equal(y,x)]
+#remainder of x divided by y
+define remainder: Lp[mod(p)]
+
+define increment: Lx[add(N1,x)]
+define decrement: Lx[subtract(N1,x)]
+#if want to keep negative numbers then need
+#the complex multiple operator expressions below
+define negative: Lx[negative(x)]
+
+define set-t:LxLp[assign(x,p)]
+
+#complex multiple operator expressions...probably will not do
+#this because then operator precedence ambiguity
+#eg "divide two by x times three" could be (2/x)*3 
+#but the person may have meant 2/(x*3) or vice versa
+define multiply-t: LxLp[multiply(x,p)]
+define times-t: LxLp[multiply(x,p)] 
+define divide-t:LxLp[divide(x,p)]
+define divided-t:LxLp[divide(x,p)]
+define add-t:LxLp[add(y,p)]
+#for set x to y plus z so x= y+z
+define plus-t: LxLp[add(x,p)]
+#subtract two times y from x
+define subtract-t:LxLp[subtract(p,x)]
+define minus-t:LxLp[subtract(x,p)]
+define greater-t:LxLp[greater(p,x)]
+define less-t:LxLp [less(p,x)]
+define equal-t:LxLp[equal(p,x)]
+#also LpLx
+
+
+#for doubles (they will have type R, unlike integers that are type e)
+# so three point five --> point(N3,N5)
+define point: LxLy[point(x,y)]
+
+# The preposition "to" is the constant function on 
+# individuals.
+define by: Lx.x
+define by-t:Lp.p
+#by-r doesnt work
+define by-r:LxLyLR[R(x,y)]
+define to: Lx.x
+define to-t: Lp.p
+define to-r: LxLyLR[R(x,y)]
+define to-q: LTLR.Lx[T(R(x))]
+define than:Lx.x
+define from:Lx.x
+define of: Lp.p
+# "is" and "a" are constant function on sets of individuals.
+define is: LP.P
+#define a: LP.P
+define are : LP.P
+# Some boolean words.
+define and-t: LpLq[q & p]
+
+#if (bool) then so say "if x is greater than two then ..."
+# for if block with more than 1 then so "if xequals zero then add one to x,multiply x by five..."
+#can treat "multiply x my five" as separate sentence but then when passing lambdacalc trees
+#to next stage keep punctuation , so indicates that the sentence is still inside the "if"
+#so use "and" to show block structire inside if
+define then:Lp.p
+define if: LpLq[if(p) -> q]
+
+#after "if" separete sentemce with else
+define otherwise: LP[else(P)]
+
+#"while xi is greater than two ..." without "then" lets c how itll work
+define while: LpLq[while(p) -> q]
+
+define and-et: LPLQLx[Q(x) & P(x)]
+define and-e: LxLyLP [P(x) & P(y)]
+define or-e:LxLyLP [P(x) V P(y)]
+
+# Words naming integers and variables
+define one: N1 
+define two: N2
+define three: N3 
+define four: N4
+#we will have to convert such numbers so when user types twenty two
+#in the tree we send to lamda calculator will have to add - so twenty-two
+define twenty-two:N22
+#have to write out all the integers??  start just 1 to 100
+define x: X
+define b: B
+define c: C  
+#and so on
+define true: True
+define false: False
+
+# negation for bools x not equal to...
+define not: LP[not(P)]
+
+# Dummy function that lets the Plop code find the
+# result.
+define result : Lp.result(p)
+
+exercise tree
+title e1
+directions set x to two
+
+[result [.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set][.NNP.p.- x]][.PP.nvd.to.np [.TO to][.NP.nvd.base.-.-.-.- [.CD two]]]]]
+
+title e2
+directions set y to twice x
+[result[.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set-t][.NNP.p.- b]][.PP.nvd.to.np [.TO to-t][.NP.nvd.base.-.-.-.- [.NNP.-.- twice][.NNP.-.- x]]]]]
+
+title e3
+directions multiply x by two
+
+#[result[ [[ multiply][[ [ x]] [[ by-r][ [ two]]]]]]]
+[result[[ [[ multiply][ [ x]] ]][[ by][ [ two]]]]]
+
+title e4
+directions subtract three form x
+
+[result [[[[subtract] [[three]]]  [[from]  [[x]]]]]]
+
+
+title e5
+directions x is greater than three
+
+[[[[x]][[ is] [[[greater][[than] [three]]]]]]]
+
+title e6
+directions set x to true
+
+[result [[[set][x]][ [to][[true]]]]]
+
+title e7
+directions if x is equal to three then set x to one
+
+#doesnt work [result[[if][[[x]][[ is][[equal][[to][[ three]]]][[ then][[set][[[x]][[[to-r][[ one]]]]]]]]]]]
+
+# complicated braket deletion and insertion
+[result[[[if][[[x]][[ is][[equal][[to][[ three]]]]]]][[ then][[[set][[x]]][[[to][[ one]]]]]]]]
