@@ -290,10 +290,6 @@ define false: False
 # negation for bools x not equal to...
 define not: LP[not(P)]
 
-# Dummy function that lets the Plop code find the
-# result.
-define result : Lp.result(p)
-
 exercise tree
 title e1
 directions set x to two
