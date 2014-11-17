@@ -15,7 +15,7 @@ variables of type <e,et> : R
 variables of type <et,t> : T
 variables of type <<et,t>,e> : W
 variables of type <<e,et>,et> : S
-
+variables of type <e,<t,t>>: Z
 #variables of type <<e,et>,t>: J
 #variables of type <e,<<e,et>,t>>: I
 #no work
@@ -136,6 +136,7 @@ define by-t:Lp.p
 define by-r:LxLyLR[R(x,y)]
 define to: Lx.x
 define to-t: Lp.p
+#define to-i:LP.P
 define to-r: LxLyLR[R(x,y)]
 define to-q: LTLR.Lx[T(R(x))]
 define than:Lx.x
@@ -164,13 +165,15 @@ define while: LpLq[while(p) -> q]
 
 define and-et: LPLQLx[Q(x) & P(x)]
 define and-e: LxLyLP [P(x) & P(y)]
+define and-te: LxLp[p & number(x)]
 define or-e:LxLyLP [P(x) V P(y)]
 
 # Words naming integers and variables
-define one: N1 
-define two: N2
-define three: N3 
-define four: N4
+define   zero: N0
+define    one: N1
+define   two: N2
+define   three: N3
+define    four: N4
 define    five: N5
 define    six: N6
 define     seven: N7
@@ -267,6 +270,8 @@ define ninety-seven: N97
 define ninety-eight: N98
 define ninety-nine: N99
 
+define hundred: Lx[hundred(x)]
+
 define x: X
 define b: B
 define c: C  
@@ -325,3 +330,14 @@ title e8
 directions x divided by x
 
 [result[[[ x] [divided]] [[by] [[ x]]]]]
+
+title e9
+
+[result[[[[set-t][[x]]] [[to-t] [[[ three][point]] [two]]]]]]
+
+title e10
+[result[[[set-t][x]][[to-t][[thirty][[plus][forty-seven]]]]]]
+
+title e11
+
+[result [[[[set-t][x]][[to-t] [[[three][hundred]] [[and-te][forty-seven]]]]]]]
