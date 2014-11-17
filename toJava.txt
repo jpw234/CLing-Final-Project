@@ -129,6 +129,12 @@ define equal-t3:LqLp[equal(q,p)]
 # so three point five --> point(N3,N5)
 #same prblm as minus [x [point y]] or [[x point]y]--i assumed [[x point] y]
 define point: LxLy[point(x,y)]
+#nine hundred point eight
+define point-te:LpLx[point(p,x)]
+#four point eight hundred and sixty-seven
+define point-et:LxLp [point(x,p)]
+#four hundred and sixty point seven hundred and eighty-seven
+deine point-tt:LpLq[point(p,q)]
 
 # The preposition "to" is the constant function on 
 # individuals.
