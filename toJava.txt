@@ -298,22 +298,22 @@ exercise tree
 title e1
 directions set x to two
 
-[result [.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set][.NNP.p.- x]][.PP.nvd.to.np [.TO to][.NP.nvd.base.-.-.-.- [.CD two]]]]]
+[[.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set][.NNP.p.- x]][.PP.nvd.to.np [.TO to][.NP.nvd.base.-.-.-.- [.CD two]]]]]
 
 title e2
 directions set y to twice x
-[result[.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set-t][.NNP.p.- b]][.PP.nvd.to.np [.TO to-t][.NP.nvd.base.-.-.-.- [.NNP.-.- twice][.NNP.-.- x]]]]]
+[[.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set-t][.NNP.p.- b]][.PP.nvd.to.np [.TO to-t][.NP.nvd.base.-.-.-.- [.NNP.-.- twice][.NNP.-.- x]]]]]
 
 title e3
 directions multiply x by two
 
 #[result[ [[ multiply][[ [ x]] [[ by-r][ [ two]]]]]]]
-[result[[ [[ multiply][ [ x]] ]][[ by][ [ two]]]]]
+[[[ [[ multiply][ [ x]] ]][[ by][ [ two]]]]]
 
 title e4
 directions subtract three form x
 
-[result [[[[subtract] [[three]]]  [[from]  [[x]]]]]]
+[[[[[subtract] [[three]]]  [[from]  [[x]]]]]]
 
 
 title e5
@@ -324,7 +324,7 @@ directions x is greater than three
 title e6
 directions set x to true
 
-[result [[[set][x]][ [to][[true]]]]]
+[ [[[set][x]][ [to][[true]]]]]
 
 title e7
 directions if x is equal to three then set x to one
@@ -332,20 +332,20 @@ directions if x is equal to three then set x to one
 #doesnt work [result[[if][[[x]][[ is][[equal][[to][[ three]]]][[ then][[set][[[x]][[[to-r][[ one]]]]]]]]]]]
 
 # complicated braket deletion and insertion
-[result[[[if][[[x]][[ is][[equal][[to][[ three]]]]]]][[ then][[[set][[x]]][[[to][[ one]]]]]]]]
+[[[[if][[[x]][[ is][[equal][[to][[ three]]]]]]][[ then][[[set][[x]]][[[to][[ one]]]]]]]]
 
 title e8
 directions x divided by x
 
-[result[[[ x] [divided]] [[by] [[ x]]]]]
+[[[[ x] [divided]] [[by] [[ x]]]]]
 
 title e9
 
-[result[[[[set-t][[x]]] [[to-t] [[[ three][point]] [two]]]]]]
+[[[[[set-t][[x]]] [[to-t] [[[ three][point]] [two]]]]]]
 
 title e10
-[result[[[set-t][x]][[to-t][[thirty][[plus][forty-seven]]]]]]
+[[[[set-t][x]][[to-t][[thirty][[plus][forty-seven]]]]]]
 
 title e11
 
-[result [[[[set-t][x]][[to-t] [[[three][hundred]] [[and-te][forty-seven]]]]]]]
+[ [[[[set-t][x]][[to-t] [[[three][hundred]] [[and-te][forty-seven]]]]]]]
