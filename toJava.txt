@@ -1,7 +1,7 @@
 Words as models
 
 # Constants for positions.
-constants of type e : N1 N2 N3 N4 N5 N6 N7 N8 N9 N10 N22 X B True False 
+constants of type e : N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 N10 N11 N12 N13 N14 N15 N16 N17 N18 N19 N20 N21 N22 N23 N24 N25 N26 N27 N28 N29 N30 N31 N32 N33 N34 N35 N36 N37 N38 N39 N40 N41 N42 N43 N44 N45 N46 N47 N48 N49 N50 N51 N52 N53 N54 N55 N56 N57 N58 N59 N60 N61 N62 N63 N64 N65 N66 N67 N68 N69 N70 N71 N72 N73 N74 N75 N76 N77 N78 N79 N80 N81 N82 N83 N84 N85 N86 N87 N88 N89 N90 N91 N92 N93 N94 N95 N96 N97 N98 N99  X B C D E F G  True False 
 #in future may represent numbers like this
 # The adjacency relation.
 constants of type <e*e,t> : D
@@ -129,9 +129,107 @@ define one: N1
 define two: N2
 define three: N3 
 define four: N4
-#we will have to convert such numbers so when user types twenty two
-#in the tree we send to lamda calculator will have to add - so twenty-two
-define twenty-two:N22
+define   zero: N0
+define    one: N1
+define   two: N2
+define   three: N3
+define    four: N4
+define    five: N5
+define    six: N6
+define     seven: N7
+define    eight: N8
+define    nine: N9
+define    ten: N10
+define    eleven: N11
+define   twelve: N12
+define   thirteen: N13
+define    fourteen: N14
+define   fifteen: N15
+define   sixteen: N16
+define   seventeen: N17
+define    eighteen: N18
+define    nineteen: N19
+define   twenty: N20
+define    twenty-one: N21
+define    twenty-two: N22
+define    twenty-three: N23
+define    twenty-four: N24
+define    twenty-five: N25
+define   twenty-six: N26
+define   twenty-seven: N27
+define   twenty-eight: N28
+define  twenty-nine: N29
+define  thirty: N30
+define  thirty-one: N31
+define thirty-two: N32
+define thirty-three: N33
+define thirty-four: N34
+define thirty-five: N35
+define thirty-six: N36
+define thirty-seven: N37
+define thirty-eight: N38
+define thirty-nine: N39
+define forty: N40
+define forty-one: N41
+define forty-two: N42
+define forty-three: N43
+define forty-four: N44
+define forty-five: N45
+define forty-six: N46
+define forty-seven: N47
+define forty-eight: N48
+define forty-nine: N49
+define fifty: N50
+define fifty-one: N51
+define fifty-two: N52
+define fifty-three: N53
+define fifty-four: N54
+define fifty-five: N55
+define fifty-six: N56
+define fifty-seven: N57
+define fifty-eight: N58
+define fifty-nine: N59
+define sixty: N60
+define sixty-one: N61
+define sixty-two: N62
+define sixty-three: N63
+define sixty-four: N64
+define sixty-five: N65
+define sixty-six: N66
+define sixty-seven: N67
+define sixty-eight: N68
+define sixty-nine: N69
+define seventy: N70
+define seventy-one: N71
+define seventy-two: N72
+define seventy-three: N73
+define seventy-four: N74
+define seventy-five: N75
+define seventy-six: N76
+define seventy-seven: N77
+define seventy-eight: N78
+define seventy-nine: N79
+define eighty: N80
+define eighty-one: N81
+define eighty-two: N82
+define eighty-three: N83
+define eighty-four: N84
+define eighty-five: N85
+define eighty-six: N86
+define eighty-seven: N87
+define eighty-eight: N88
+define eighty-nine: N89
+define ninety: N90
+define ninety-one: N91
+define ninety-two: N92
+define ninety-three: N93
+define ninety-four: N94
+define ninety-five: N95
+define ninety-six: N96
+define ninety-seven: N97
+define ninety-eight: N98
+define ninety-nine: N99
+
 #have to write out all the integers??  start just 1 to 100
 define x: X
 define b: B
