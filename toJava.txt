@@ -52,6 +52,8 @@ define less:LxLy [less(y,x)]
 define equal:LxLy[equal(y,x)]
 #remainder of x divided by y
 define remainder: Lp[mod(p)]
+#not sure how tree will look bu this one works with tree being [[x modulo] y]
+define modulo: LxLy[mod(x,y)]
 
 #add or subtract 1 to/from integers only
 define increment: Lx[add(N1,x)]
