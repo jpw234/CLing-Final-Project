@@ -42,8 +42,10 @@ define add:LxLy[add(x,y)]
 define plus: LxLy [add(x,y)]
 # subtract 3 from y so y-3 
 define subtract: LxLy [subtract(y,x)]
-#x minus y
-define minus:LxLy[subtract(x,y)]
+#ex: set x to x minus y  if tree is [x [[minus][y]]]--> also similar situation in point(x,y)
+#where i assume a different parse, in the future may be better to choose 1 kind of parse and stick to it
+#note then will have to rewrite definition for either minus or point
+define minus:LyLx[subtract(x,y)]
 #x is greater than 3 --> x is greater(y,N3)-->greater(x,N3)
 define greater:LxLy[greater(y,x)]
 define less:LxLy [less(y,x)]
@@ -53,7 +55,7 @@ define remainder: Lp[mod(p)]
 
 #add or subtract 1 to/from integers only
 define increment: Lx[add(N1,x)]
-define decrement: Lx[subtract(N1,x)]
+define decrement: Lx[subtract(x,N1)]
 #if want to do operators on negative numbers then need
 #the complex multiple operator expressions below
 #for integers
@@ -61,7 +63,7 @@ define negative: Lx[negative(x)]
 #for doubles
 define negative: Lp[negative(p)]
 
-#assignment like x=12*31
+#assignment like x=12*31 or x=point(1,5)
 define set-t:LxLp[assign(x,p)]
 
 #complex multiple operator expressions...probably will not do
@@ -84,7 +86,7 @@ define plus-t: LxLp[add(x,p)]
 define subtract-t:LxLp[subtract(p,x)]
 #x-p
 define minus-t:LxLp[subtract(x,p)]
-#p is greater than x
+#p is [greater than x]
 define greater-t:LxLp[greater(p,x)]
 define less-t:LxLp [less(p,x)]
 define equal-t:LxLp[equal(p,x)]
@@ -100,6 +102,7 @@ define plus-t2: LpLx[add(p,x)]
 define subtract-t2:LpLx[subtract(x,p)]
 #p - x
 define minus-t2:LpLx[subtract(p,x)]
+#x is [greater than p]
 define greater-t2:LpLx[greater(x,p)]
 define less-t2:LpLx[less(x,p)]
 define equal-t2:LpLx[equal(x,p)]
@@ -122,6 +125,7 @@ define equal-t3:LqLp[equal(q,p)]
 
 #for doubles (they will have type R, unlike integers that are type e)
 # so three point five --> point(N3,N5)
+#same prblm as minus [x [point y]] or [[x point]y]--i assumed [[x point] y]
 define point: LxLy[point(x,y)]
 
 # The preposition "to" is the constant function on 
@@ -167,11 +171,6 @@ define one: N1
 define two: N2
 define three: N3 
 define four: N4
-define   zero: N0
-define    one: N1
-define   two: N2
-define   three: N3
-define    four: N4
 define    five: N5
 define    six: N6
 define     seven: N7
@@ -268,7 +267,6 @@ define ninety-seven: N97
 define ninety-eight: N98
 define ninety-nine: N99
 
-#have to write out all the integers??  start just 1 to 100
 define x: X
 define b: B
 define c: C  
@@ -322,3 +320,8 @@ directions if x is equal to three then set x to one
 
 # complicated braket deletion and insertion
 [result[[[if][[[x]][[ is][[equal][[to][[ three]]]]]]][[ then][[[set][[x]]][[[to][[ one]]]]]]]]
+
+title e8
+directions x divided by x
+
+[result[[[ x] [divided]] [[by] [[ x]]]]]
