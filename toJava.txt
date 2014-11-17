@@ -19,7 +19,7 @@ variables of type <<e,et>,et> : S
 #variables of type <<e,et>,t>: J
 #variables of type <e,<<e,et>,t>>: I
 #no work
-variables of type <e,<e,<<e,et>,t>>> : O
+#variables of type <e,<e,<<e,et>,t>>> : O
 #variables of type <e,<e<<e,e>,t>>> : O
 
 multiple letter identifiers
@@ -29,7 +29,7 @@ use rule non-branching nodes
 use rule predicate modification
 use rule lambda abstraction
 
-#simple
+#simple (int operation int)
 define set: LxLy[assign(x,y)]
 define multiply: LxLy[multiply(x,y)]
 define times: LxLy[multiply(x,y)] 
@@ -40,8 +40,8 @@ define twice: Lx [multiply(N2,x)]
 define add:LxLy[add(x,y)]
 #for set x to y plus z so x= y+z
 define plus: LxLy [add(x,y)]
-# subtract 3 from x so x-3
-define subtract: LxLy [subtract(x,y)]
+# subtract 3 from y so y-3 
+define subtract: LxLy [subtract(y,x)]
 #x minus y
 define minus:LxLy[subtract(x,y)]
 #x is greater than 3 --> x is greater(y,N3)-->greater(x,N3)
@@ -51,12 +51,17 @@ define equal:LxLy[equal(y,x)]
 #remainder of x divided by y
 define remainder: Lp[mod(p)]
 
+#add or subtract 1 to/from integers only
 define increment: Lx[add(N1,x)]
 define decrement: Lx[subtract(N1,x)]
 #if want to do operators on negative numbers then need
 #the complex multiple operator expressions below
+#for integers
 define negative: Lx[negative(x)]
+#for doubles
+define negative: Lp[negative(p)]
 
+#assignment like x=12*31
 define set-t:LxLp[assign(x,p)]
 
 #complex multiple operator expressions...probably will not do
@@ -66,21 +71,54 @@ define set-t:LxLp[assign(x,p)]
 #actually these are very useful for operations on doubles!
 #so keep these definitions but still don't want to
 #allow more than 1 operation at a time
+
+#(int operation double)
 define multiply-t: LxLp[multiply(x,p)]
 define times-t: LxLp[multiply(x,p)] 
 define divide-t:LxLp[divide(x,p)]
 define divided-t:LxLp[divide(x,p)]
-define add-t:LxLp[add(y,p)]
-#for set x to y plus z so x= y+z
+define add-t:LxLp[add(x,p)]
+#for set x to y plus z so x=y+z
 define plus-t: LxLp[add(x,p)]
-#subtract two times y from x
+#subtract x from p so p-x
 define subtract-t:LxLp[subtract(p,x)]
+#x-p
 define minus-t:LxLp[subtract(x,p)]
+#p is greater than x
 define greater-t:LxLp[greater(p,x)]
 define less-t:LxLp [less(p,x)]
 define equal-t:LxLp[equal(p,x)]
-#also LpLx
 
+#also LpLx  (double operation int)
+define multiply-t2: LpLx[multiply(p,x)]
+define times-t2: LpLx[multiply(p,x)] 
+define divide-t2:LpLx[divide(p,x)]
+define divided-t2:LpLx[divide(p,x)]
+define add-t2:LpLx[add(p,x)]
+define plus-t2: LpLx[add(p,x)]
+#subtract p from x  (x-p)
+define subtract-t2:LpLx[subtract(x,p)]
+#p - x
+define minus-t2:LpLx[subtract(p,x)]
+define greater-t2:LpLx[greater(x,p)]
+define less-t2:LpLx[less(x,p)]
+define equal-t2:LpLx[equal(x,p)]
+
+#now LpLq  (double operation double)
+define multiply-t3: LpLq[multiply(p,q)]
+define times-t3: LpLq[multiply(p,q)] 
+define divide-t3:LpLq[divide(p,q)]
+define divided-t3:LpLq[divide(p,q)]
+define add-t3:LpLq[add(p,q)]
+define plus-t3: LpLq[add(p,q)]
+#subtract p from q  (q-p)
+define subtract-t3:LpLq[subtract(q,p)]
+#p - q
+define minus-t3:LpLq[subtract(p,q)]
+#p is greater than q  --i took into account tree structure and that q goes into greater(x,y) first
+define greater-t3:LqLp[greater(p,q)]
+define less-t3:LqLp[less(p,q)]
+define equal-t3:LqLp[equal(q,p)]
 
 #for doubles (they will have type R, unlike integers that are type e)
 # so three point five --> point(N3,N5)
