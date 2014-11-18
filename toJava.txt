@@ -307,6 +307,12 @@ define false: False
 # negation for bools x not equal to...
 define not: LP[not(P)]
 
+#printing and returning
+define print: Lx[print(x)]
+define print-t: Lp[print(p)]
+define return:Lx[return(x)]
+define return-t:Lp[return(p)]
+
 exercise tree
 title e1
 directions set x to two
