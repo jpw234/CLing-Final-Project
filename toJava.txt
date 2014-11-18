@@ -148,6 +148,7 @@ define to-t: Lp.p
 define to-r: LxLyLR[R(x,y)]
 define to-q: LTLR.Lx[T(R(x))]
 define than:Lx.x
+define than-t:Lp.p
 define from:Lx.x
 define of: Lp.p
 # "is" and "a" are constant function on sets of individuals.
@@ -156,9 +157,6 @@ define is: LP.P
 define are : LP.P
 # Some boolean words.
 define and-t: LpLq[q & p]
-
-define than:Lx.x
-define than-t:Lp.p
 
 #if (bool) then so say "if x is greater than two then ..."
 # for if block with more than 1 then so "if xequals zero then add one to x,multiply x by five..."
@@ -179,6 +177,7 @@ define and-e: LxLyLP [P(x) & P(y)]
 #hundred
 define and-te: LxLp[p & number(x)]
 define or-e:LxLyLP [P(x) V P(y)]
+define or-t:LpLq [p V q]
 
 # Words naming integers and variables
 define   zero: N0
@@ -288,7 +287,7 @@ define thousand-t: Lp[thousand(p)]
 define million: Lx[million(x)]
 define million-t: Lp[million(p)]
 define billion: Lx[billion(x)]
-#max int in java is  2,147,483,647  two billion one hundred and forty-seven million four hundred and eighty-three thousand six hundred and forty-seven tree e12
+#max int in java is  2,147,483,647  [[[two] [billion]] [[[[one] [hundred]] [[and] [[forty-seven][million]]]] [[[four hundred and eighty-three] thousand] [[six hundred] [[and] [forty-seven]]]]]]
 #so have to define some more "and"'s
 #thousand
 define and-tte: LxLpLq [q & p & number(x)]
@@ -367,3 +366,7 @@ title e11
 title e12
 
 [[[two] [billion]] [[[[[one] [hundred]] [[and-te] [forty-seven]]]  [million-t]] [[[[[four] [hundred]] [[and-te] [eighty-three]]] thousand-t] [[six hundred] [[and-tttte] [forty-seven]]]]]]
+
+title e13
+#more = greater
+ [[ if] [[[x] [[is] [[less] [[than] [zero]]]]] [[or-t] [[x] [[[is][[[[greater-t2] [[than-t] [[one] [hundred]]]]]]]]]]]]
