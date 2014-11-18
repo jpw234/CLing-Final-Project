@@ -1,13 +1,11 @@
 Words as models
 
-# Constants for positions.
+# Constants for numbers and user named variables
 constants of type e : N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 N10 N11 N12 N13 N14 N15 N16 N17 N18 N19 N20 N21 N22 N23 N24 N25 N26 N27 N28 N29 N30 N31 N32 N33 N34 N35 N36 N37 N38 N39 N40 N41 N42 N43 N44 N45 N46 N47 N48 N49 N50 N51 N52 N53 N54 N55 N56 N57 N58 N59 N60 N61 N62 N63 N64 N65 N66 N67 N68 N69 N70 N71 N72 N73 N74 N75 N76 N77 N78 N79 N80 N81 N82 N83 N84 N85 N86 N87 N88 N89 N90 N91 N92 N93 N94 N95 N96 N97 N98 N99  X B C D E F G  True False 
-#in future may represent numbers like this
 # The adjacency relation.
 constants of type <e*e,t> : D
-# C(N3) is not needed for java
 constants of type <e,e> : C
-#may not need as many
+
 variables of type e : x y z
 variables of type <e,t> : P-Q
 variables of type t : p q o r
@@ -16,6 +14,7 @@ variables of type <et,t> : T
 variables of type <<et,t>,e> : W
 variables of type <<e,et>,et> : S
 variables of type <e,<t,t>>: Z
+
 #variables of type <<e,et>,t>: J
 #variables of type <e,<<e,et>,t>>: I
 #no work
@@ -63,7 +62,7 @@ define decrement: Lx[subtract(x,N1)]
 #for integers
 define negative: Lx[negative(x)]
 #for doubles
-define negative: Lp[negative(p)]
+define negative-t: Lp[negative(p)]
 
 #assignment like x=12*31 or x=point(1,5)
 define set-t:LxLp[assign(x,p)]
@@ -77,53 +76,53 @@ define set-t:LxLp[assign(x,p)]
 #allow more than 1 operation at a time
 
 #(int operation double)
-define multiply-t: LxLp[multiply(x,p)]
-define times-t: LxLp[multiply(x,p)] 
-define divide-t:LxLp[divide(x,p)]
-define divided-t:LxLp[divide(x,p)]
-define add-t:LxLp[add(x,p)]
+define multiply-et: LxLp[multiply(x,p)]
+define times-et: LxLp[multiply(x,p)] 
+define divide-et:LxLp[divide(x,p)]
+define divided-et:LxLp[divide(x,p)]
+define add-et:LxLp[add(x,p)]
 #for set x to y plus z so x=y+z
-define plus-t: LxLp[add(x,p)]
+define plus-et: LxLp[add(x,p)]
 #subtract x from p so p-x
-define subtract-t:LxLp[subtract(p,x)]
+define subtract-et:LxLp[subtract(p,x)]
 #x-p
-define minus-t:LxLp[subtract(x,p)]
+define minus-et:LxLp[subtract(x,p)]
 #p is [greater than x]
-define greater-t:LxLp[greater(p,x)]
-define less-t:LxLp [less(p,x)]
-define equal-t:LxLp[equal(p,x)]
+define greater-et:LxLp[greater(p,x)]
+define less-et:LxLp [less(p,x)]
+define equal-et:LxLp[equal(p,x)]
 
 #also LpLx  (double operation int)
-define multiply-t2: LpLx[multiply(p,x)]
-define times-t2: LpLx[multiply(p,x)] 
-define divide-t2:LpLx[divide(p,x)]
-define divided-t2:LpLx[divide(p,x)]
-define add-t2:LpLx[add(p,x)]
-define plus-t2: LpLx[add(p,x)]
+define multiply-te: LpLx[multiply(p,x)]
+define times-te: LpLx[multiply(p,x)] 
+define divide-te:LpLx[divide(p,x)]
+define divided-te:LpLx[divide(p,x)]
+define add-te:LpLx[add(p,x)]
+define plus-te: LpLx[add(p,x)]
 #subtract p from x  (x-p)
-define subtract-t2:LpLx[subtract(x,p)]
+define subtract-te:LpLx[subtract(x,p)]
 #p - x
-define minus-t2:LpLx[subtract(p,x)]
+define minus-te:LpLx[subtract(p,x)]
 #x is [greater than p]
-define greater-t2:LpLx[greater(x,p)]
-define less-t2:LpLx[less(x,p)]
-define equal-t2:LpLx[equal(x,p)]
+define greater-te:LpLx[greater(x,p)]
+define less-te:LpLx[less(x,p)]
+define equal-te:LpLx[equal(x,p)]
 
 #now LpLq  (double operation double)
-define multiply-t3: LpLq[multiply(p,q)]
-define times-t3: LpLq[multiply(p,q)] 
-define divide-t3:LpLq[divide(p,q)]
-define divided-t3:LpLq[divide(p,q)]
-define add-t3:LpLq[add(p,q)]
-define plus-t3: LpLq[add(p,q)]
+define multiply-tt: LpLq[multiply(p,q)]
+define times-tt: LpLq[multiply(p,q)] 
+define divide-tt:LpLq[divide(p,q)]
+define divided-tt:LpLq[divide(p,q)]
+define add-tt:LpLq[add(p,q)]
+define plus-tt: LpLq[add(p,q)]
 #subtract p from q  (q-p)
-define subtract-t3:LpLq[subtract(q,p)]
+define subtract-tt:LpLq[subtract(q,p)]
 #p - q
-define minus-t3:LpLq[subtract(p,q)]
+define minus-tt:LpLq[subtract(p,q)]
 #p is greater than q  --i took into account tree structure and that q goes into greater(x,y) first
-define greater-t3:LqLp[greater(p,q)]
-define less-t3:LqLp[less(p,q)]
-define equal-t3:LqLp[equal(q,p)]
+define greater-tt:LqLp[greater(p,q)]
+define less-tt:LqLp[less(p,q)]
+define equal-tt:LqLp[equal(q,p)]
 
 #for doubles (they will have type R, unlike integers that are type e)
 # so three point five --> point(N3,N5)
@@ -141,12 +140,12 @@ define point-tt:LpLq[point(p,q)]
 define by: Lx.x
 define by-t:Lp.p
 #by-r doesnt work
-define by-r:LxLyLR[R(x,y)]
+#define by-r:LxLyLR[R(x,y)]
 define to: Lx.x
 define to-t: Lp.p
 #define to-i:LP.P
-define to-r: LxLyLR[R(x,y)]
-define to-q: LTLR.Lx[T(R(x))]
+#define to-r: LxLyLR[R(x,y)]
+#define to-q: LTLR.Lx[T(R(x))]
 define than:Lx.x
 define than-t:Lp.p
 define from:Lx.x
@@ -155,8 +154,7 @@ define of: Lp.p
 define is: LP.P
 #define a: LP.P
 define are : LP.P
-# Some boolean words.
-define and-t: LpLq[q & p]
+
 
 #if (bool) then so say "if x is greater than two then ..."
 # for if block with more than 1 then so "if xequals zero then add one to x,multiply x by five..."
@@ -172,11 +170,10 @@ define otherwise: LP[else(P)]
 #"while xi is greater than two ..." without "then" lets c how itll work
 define while: LpLq[while(p) -> q]
 
-define and-et: LPLQLx[Q(x) & P(x)]
-define and-e: LxLyLP [P(x) & P(y)]
-#hundred
-define and-te: LxLp[p & number(x)]
-define or-e:LxLyLP [P(x) V P(y)]
+define and-t: LpLq[q & p]
+#define and-et: LPLQLx[Q(x) & P(x)]
+#define and-e: LxLyLP [P(x) & P(y)]
+#define or-et:LxLyLP [P(x) V P(y)]
 define or-t:LpLq [p V q]
 
 # Words naming integers and variables
@@ -289,6 +286,8 @@ define million-t: Lp[million(p)]
 define billion: Lx[billion(x)]
 #max int in java is  2,147,483,647  [[[two] [billion]] [[[[one] [hundred]] [[and] [[forty-seven][million]]]] [[[four hundred and eighty-three] thousand] [[six hundred] [[and] [forty-seven]]]]]]
 #so have to define some more "and"'s
+#hundred
+define and-te: LxLp[p & number(x)]
 #thousand
 define and-tte: LxLpLq [q & p & number(x)]
 #million
@@ -296,11 +295,13 @@ define and-ttte: LxLpLqLo [o & q & p & number(x)]
 #billion
 define and-tttte: LxLpLqLoLr [r & o & q & p & number(x)]
 
-
+#variables user will use, in future think about extending so user can create variable names
 define x: X
 define b: B
 define c: C  
 #and so on
+
+#booleans
 define true: True
 define false: False
 
@@ -374,5 +375,5 @@ title e12
 [[[two] [billion]] [[[[[one] [hundred]] [[and-te] [forty-seven]]]  [million-t]] [[[[[four] [hundred]] [[and-te] [eighty-three]]] thousand-t] [[six hundred] [[and-tttte] [forty-seven]]]]]]
 
 title e13
-#more = greater
- [[ if] [[[x] [[is] [[less] [[than] [zero]]]]] [[or-t] [[x] [[[is][[[[greater-t2] [[than-t] [[one] [hundred]]]]]]]]]]]]
+#more = greater  later add it as synonym
+ [[ if] [[[x] [[is] [[less] [[than] [zero]]]]] [[or-t] [[x] [[[is][[[[greater-te] [[than-t] [[one] [hundred]]]]]]]]]]]]
