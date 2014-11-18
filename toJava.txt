@@ -10,7 +10,7 @@ constants of type <e,e> : C
 #may not need as many
 variables of type e : x y z
 variables of type <e,t> : P-Q
-variables of type t : p q
+variables of type t : p q o r
 variables of type <e,et> : R
 variables of type <et,t> : T
 variables of type <<et,t>,e> : W
@@ -176,6 +176,7 @@ define while: LpLq[while(p) -> q]
 
 define and-et: LPLQLx[Q(x) & P(x)]
 define and-e: LxLyLP [P(x) & P(y)]
+#hundred
 define and-te: LxLp[p & number(x)]
 define or-e:LxLyLP [P(x) V P(y)]
 
@@ -282,6 +283,17 @@ define ninety-eight: N98
 define ninety-nine: N99
 
 define hundred: Lx[hundred(x)]
+define thousand: Lx[thousand(x)]
+define thousand-t: Lp[thousand(p)]
+define million: Lx[million(x)]
+define million-t: Lp[million(p)]
+define billion: Lx[billion(x)]
+#max int in java is  2,147,483,647  [two billion] [[one hundred and forty-seven] million] [[four hundred and eighty-three] thousand] [[six hundred] and forty-seven]
+#so have to define some more "and"'s
+define and-tte: LxLpLq [q & p & number(x)]
+define and-ttte: LxLpLqLo [o & q & p & number(x)]
+define and-tttte: LxLpLqLoLr [r & o & q & p & number(x)]
+
 
 define x: X
 define b: B
