@@ -157,6 +157,9 @@ define are : LP.P
 # Some boolean words.
 define and-t: LpLq[q & p]
 
+define than:Lx.x
+define than-t:Lp.p
+
 #if (bool) then so say "if x is greater than two then ..."
 # for if block with more than 1 then so "if xequals zero then add one to x,multiply x by five..."
 #can treat "multiply x my five" as separate sentence but then when passing lambdacalc trees
