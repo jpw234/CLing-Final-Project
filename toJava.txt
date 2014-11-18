@@ -134,7 +134,7 @@ define point-te:LpLx[point(p,x)]
 #four point eight hundred and sixty-seven
 define point-et:LxLp [point(x,p)]
 #four hundred and sixty point seven hundred and eighty-seven
-deine point-tt:LpLq[point(p,q)]
+define point-tt:LpLq[point(p,q)]
 
 # The preposition "to" is the constant function on 
 # individuals.
@@ -288,10 +288,13 @@ define thousand-t: Lp[thousand(p)]
 define million: Lx[million(x)]
 define million-t: Lp[million(p)]
 define billion: Lx[billion(x)]
-#max int in java is  2,147,483,647  [two billion] [[one hundred and forty-seven] million] [[four hundred and eighty-three] thousand] [[six hundred] and forty-seven]
+#max int in java is  2,147,483,647  two billion one hundred and forty-seven million four hundred and eighty-three thousand six hundred and forty-seven tree e12
 #so have to define some more "and"'s
+#thousand
 define and-tte: LxLpLq [q & p & number(x)]
+#million
 define and-ttte: LxLpLqLo [o & q & p & number(x)]
+#billion
 define and-tttte: LxLpLqLoLr [r & o & q & p & number(x)]
 
 
@@ -360,3 +363,7 @@ title e10
 title e11
 
 [ [[[[set-t][x]][[to-t] [[[three][hundred]] [[and-te][forty-seven]]]]]]]
+
+title e12
+
+[[[two] [billion]] [[[[[one] [hundred]] [[and-te] [forty-seven]]]  [million-t]] [[[[[four] [hundred]] [[and-te] [eighty-three]]] thousand-t] [[six hundred] [[and-tttte] [forty-seven]]]]]]
