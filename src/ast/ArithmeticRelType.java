@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public enum ArithmeticRelType {
 	LESS, GREATER, EQUAL, NE, GE, LE;
 	

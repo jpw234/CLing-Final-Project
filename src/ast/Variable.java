@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public class Variable implements NValue, BValue {
 	private String name;
 	

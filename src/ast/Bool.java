@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public class Bool implements BValue {
 	private boolean value;
 	

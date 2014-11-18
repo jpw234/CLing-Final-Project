@@ -1,6 +1,8 @@
 package ast;
 
-public class PrintCommand extends Command {
+import pretty.PrettyPrinter;
+
+public class PrintCommand implements Command {
 	private Value val;
 	
 	public PrintCommand(Value v) {
@@ -11,6 +13,6 @@ public class PrintCommand extends Command {
 		pp.sb.append("System.out.println(");
 		val.prettyPrint(pp);
 		pp.closeParen();
-		super.prettyPrint(pp);
+		pp.semicolonEndline();
 	}
 }

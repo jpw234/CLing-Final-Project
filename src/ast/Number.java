@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public class Number implements NValue {
 	private double value;
 	

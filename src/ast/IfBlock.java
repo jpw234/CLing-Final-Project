@@ -1,6 +1,8 @@
 package ast;
 
-public class IfBlock extends Command {
+import pretty.PrettyPrinter;
+
+public class IfBlock implements Command {
 	
 	private BValue condition;
 	private Program branch1;

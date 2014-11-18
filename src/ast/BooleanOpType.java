@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public enum BooleanOpType {
 	AND, OR, NOT;
 	

@@ -2,6 +2,8 @@ package ast;
 
 import java.util.ArrayList;
 
+import pretty.PrettyPrinter;
+
 public class Program implements Node {
 	
 	private ArrayList<Command> children;

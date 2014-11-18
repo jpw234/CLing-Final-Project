@@ -1,6 +1,8 @@
 package ast;
 
-public class WhileBlock extends Command {
+import pretty.PrettyPrinter;
+
+public class WhileBlock implements Command {
 	
 	private BValue condition;
 	private Program content;

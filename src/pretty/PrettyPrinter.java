@@ -1,4 +1,18 @@
-package ast;
+package pretty;
+
+import ast.ArithmeticOp;
+import ast.ArithmeticOpType;
+import ast.ArithmeticRel;
+import ast.ArithmeticRelType;
+import ast.Assignment;
+import ast.Bool;
+import ast.IfBlock;
+import ast.NValue;
+import ast.Number;
+import ast.PrintCommand;
+import ast.Program;
+import ast.Variable;
+import ast.WhileBlock;
 
 public class PrettyPrinter {
 	public StringBuffer sb;
@@ -17,6 +31,11 @@ public class PrettyPrinter {
 	public void closeParen(){
 		sb.setCharAt(sb.length() - 1, ')');
 		sb.append(' ');
+	}
+	
+	public void semicolonEndline(){
+		sb.setCharAt(sb.length() - 1, ';');
+		endLine();
 	}
 	
 	

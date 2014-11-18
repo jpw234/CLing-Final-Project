@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public enum ArithmeticOpType {
 	PLUS, MINUS, TIMES, DIVIDE, MOD;
 		

@@ -1,8 +1,7 @@
 package ast;
 
-public abstract class Command implements Node {
-	public void prettyPrint(PrettyPrinter pp){
-		pp.sb.setCharAt(pp.sb.length() - 1, ';');
-		pp.endLine();
-	};
+import pretty.PrettyPrinter;
+
+public interface Command extends Node {
+	public void prettyPrint(PrettyPrinter pp);
 }

@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public class ArithmeticRel implements BValue {
 	private ArithmeticRelType type;
 	private NValue lValue;

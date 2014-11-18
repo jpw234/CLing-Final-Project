@@ -1,6 +1,8 @@
 package ast;
 
-public class Assignment extends Command {
+import pretty.PrettyPrinter;
+
+public class Assignment implements Command {
 
 	private Variable var;
 	private Value val;
@@ -14,6 +16,6 @@ public class Assignment extends Command {
 		var.prettyPrint(pp);
 		pp.sb.append("= ");
 		val.prettyPrint(pp);
-		super.prettyPrint(pp);
+		pp.semicolonEndline();
 	}
 }

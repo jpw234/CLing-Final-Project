@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public class BooleanOp implements BValue {
 	private BooleanOpType type;
 	private BValue lValue;

@@ -1,5 +1,7 @@
 package ast;
 
+import pretty.PrettyPrinter;
+
 public class ArithmeticOp implements NValue {
 	private ArithmeticOpType type;
 	private NValue lValue;
