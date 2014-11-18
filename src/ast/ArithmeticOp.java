@@ -11,7 +11,10 @@ public class ArithmeticOp implements NValue {
 		rValue = v2;
 	}
 	
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
+	@Override
+	public void prettyPrint(PrettyPrinter pp) {
+		lValue.prettyPrint(pp);
+		type.prettyPrint(pp);
+		rValue.prettyPrint(pp);
 	}
 }

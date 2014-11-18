@@ -1,6 +1,6 @@
 package ast;
 
-public class IfBlock implements Command {
+public class IfBlock extends Command {
 	
 	private BValue condition;
 	private Program branch1;
@@ -17,7 +17,15 @@ public class IfBlock implements Command {
 		hasElse = true;
 	}
 	
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
+	public void prettyPrint(PrettyPrinter pp) {
+		pp.sb.append("if (");
+		condition.prettyPrint(pp);
+		pp.closeParen();
+		branch1.prettyPrint(pp);
+		if(hasElse){
+			pp.sb.append("else ");
+			branch2.prettyPrint(pp);
+		}
+		pp.endLine();
 	}
 }

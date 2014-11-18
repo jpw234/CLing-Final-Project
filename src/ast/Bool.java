@@ -7,7 +7,7 @@ public class Bool implements BValue {
 		value = val;
 	}
 
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
+	public void prettyPrint(PrettyPrinter pp) {
+		pp.sb.append(value ? "true " : "false ");
 	}
 }

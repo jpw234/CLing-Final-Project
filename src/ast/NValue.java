@@ -1,5 +1,5 @@
 package ast;
 
 public interface NValue extends Value {
-	public void prettyPrint(StringBuffer sb);
+	public void prettyPrint(PrettyPrinter pp);
 }

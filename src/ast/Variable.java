@@ -7,7 +7,7 @@ public class Variable implements NValue, BValue {
 		name = n;
 	}
 	
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
+	public void prettyPrint(PrettyPrinter pp) {
+		pp.sb.append(name).append(' ');
 	}
 }

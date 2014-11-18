@@ -1,6 +1,6 @@
 package ast;
 
-public class WhileBlock implements Command {
+public class WhileBlock extends Command {
 	
 	private BValue condition;
 	private Program content;
@@ -10,7 +10,11 @@ public class WhileBlock implements Command {
 		content = cont;
 	}
 	
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
+	public void prettyPrint(PrettyPrinter pp) {
+		pp.sb.append("while (");
+		condition.prettyPrint(pp);
+		pp.closeParen();
+		content.prettyPrint(pp);
+		pp.endLine();
 	}
 }

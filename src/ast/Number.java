@@ -7,7 +7,7 @@ public class Number implements NValue {
 		value = val;
 	}
 	
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
+	public void prettyPrint(PrettyPrinter pp) {
+		pp.sb.append(value).append(' ');
 	}
 }

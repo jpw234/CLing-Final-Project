@@ -11,10 +11,10 @@ public class ArithmeticRel implements BValue {
 		rValue = v2;
 	}
 	
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
-		//NOTE: I'm not yet sure if we're doing <= and >= as their own ArithmeticRelTypes, or as combinations
-		// 		of <, > and = yet. If that will change your implementation, wait on it a bit.
+	public void prettyPrint(PrettyPrinter pp) {
+		lValue.prettyPrint(pp);
+		type.prettyPrint(pp);
+		rValue.prettyPrint(pp);
 	}
 	
 }

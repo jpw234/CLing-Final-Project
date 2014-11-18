@@ -22,7 +22,13 @@ public class Program implements Node {
 		return children;
 	}
 	
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
+	public void prettyPrint(PrettyPrinter pp) {
+		pp.sb.append("{ ");
+		pp.tabCount++;
+		pp.endLine();
+		for(Command c: children) c.prettyPrint(pp);
+		pp.sb.deleteCharAt(pp.sb.length() - 1); // delete extra tab
+		pp.tabCount--;
+		pp.sb.append("} ");
 	}
 }

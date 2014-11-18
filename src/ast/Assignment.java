@@ -1,6 +1,6 @@
 package ast;
 
-public class Assignment implements Command {
+public class Assignment extends Command {
 
 	private Variable var;
 	private Value val;
@@ -10,7 +10,10 @@ public class Assignment implements Command {
 		val = v2;
 	}
 	
-	public void prettyPrint(StringBuffer sb) {
-		//TODO: Implement this
+	public void prettyPrint(PrettyPrinter pp) {
+		var.prettyPrint(pp);
+		pp.sb.append("= ");
+		val.prettyPrint(pp);
+		super.prettyPrint(pp);
 	}
 }
