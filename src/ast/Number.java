@@ -4,12 +4,19 @@ import pretty.PrettyPrinter;
 
 public class Number implements NValue {
 	private double value;
+	private boolean isInteger;
 	
-	public Number(double val) {
+	public Number(double val, boolean isInt) {
 		value = val;
+		isInteger = isInt;
 	}
 	
 	public void prettyPrint(PrettyPrinter pp) {
-		pp.sb.append(value).append(' ');
+		if(isInteger) {
+			pp.sb.append((int) value).append(' ');
+		}
+		else pp.sb.append(value).append(' ');
+		
+		//I changed this to reflect the addition of isInteger - Jared
 	}
 }

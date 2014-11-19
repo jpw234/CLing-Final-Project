@@ -41,13 +41,13 @@ public class PrettyPrinter {
 	
 	public static void main(String... args){
 		Program p = new Program();
-		ArithmeticOp op = new ArithmeticOp(new Number(53), new Number(10), ArithmeticOpType.DIVIDE);
-		ArithmeticRel r = new ArithmeticRel(ArithmeticRelType.GE, op, new Number(5));
+		ArithmeticOp op = new ArithmeticOp(new Number(53, true), new Number(10, true), ArithmeticOpType.DIVIDE);
+		ArithmeticRel r = new ArithmeticRel(ArithmeticRelType.GE, op, new Number(5, true));
 		Program then = new Program();
-		then.addCommand(new PrintCommand(new Number(1)));
+		then.addCommand(new PrintCommand(new Number(1, true)));
 		Program els = new Program();
 		Program whil = new Program();
-		whil.addCommand(new Assignment(new Variable("x"), new Number(5)));
+		whil.addCommand(new Assignment(new Variable("x"), new Number(5, true)));
 		WhileBlock wb = new WhileBlock(new Bool(true), whil);
 		els.addCommand(wb);
 		IfBlock ifb = new IfBlock(r, then);
