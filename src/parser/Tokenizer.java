@@ -168,6 +168,8 @@ public class Tokenizer implements Iterator<Token> {
 			setNextToken(Token.TRUE);
 		else if(id.equals("False"))
 			setNextToken(Token.FALSE);
+		else if(id.equals("not"))
+			setNextToken(Token.NOT);
 		else if(id.charAt(0) == 'N' && id.length() > 1) {//then it's a number
 			try {
 				String numString = id.substring(1);
