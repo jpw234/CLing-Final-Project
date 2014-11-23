@@ -301,14 +301,14 @@ define x: X
 define b: B
 define c: C  
 define d: D
-define e: E
+#define e: E
 define f: F
 define g: G
 define h: H
-define i: I
+#define i: I
 define j: J
 define k: K
-define l: L
+#define l: L
 define m: M
 define n: N
 define t: T
