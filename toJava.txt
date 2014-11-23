@@ -171,10 +171,14 @@ define otherwise: LP[else(P)]
 #"while xi is greater than two ..." without "then" lets c how itll work
 define while: LpLq[while(p) -> q]
 
-define and-t: LpLq[q & p]
+#boolean and, used in "x is greater that two and-t y is less than three"
+define and-t: LpLq
+#probably won't need
 #define and-et: LPLQLx[Q(x) & P(x)]
 #define and-e: LxLyLP [P(x) & P(y)]
 #define or-et:LxLyLP [P(x) V P(y)]
+
+#boolean or, used in "x is greater that two or-t y is less than three"
 define or-t:LpLq [p V q]
 
 # Words naming integers and variables
