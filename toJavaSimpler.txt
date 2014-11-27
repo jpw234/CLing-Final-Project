@@ -472,7 +472,7 @@ define N200: N200
 
 
 #variables user will use, in future think about extending so user can create variable names
-#var1 thru var100
+#V1 thru V200
 define x:X
 define b:B
 define V1: V1
