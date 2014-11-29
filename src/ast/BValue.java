@@ -1,7 +1,10 @@
 package ast;
 
-import pretty.PrettyPrinter;
 
-public interface BValue extends Value {
-	public void prettyPrint(PrettyPrinter pp);
+public abstract class BValue implements Value {
+
+	@Override
+	public VariableType inferType() {
+		return VariableType.BOOL;
+	}
 }

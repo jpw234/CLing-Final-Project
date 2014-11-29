@@ -2,7 +2,7 @@ package ast;
 
 import pretty.PrettyPrinter;
 
-public class ArithmeticRel implements BValue {
+public class ArithmeticRel extends BValue {
 	private ArithmeticRelType type;
 	private NValue lValue;
 	private NValue rValue;
@@ -18,5 +18,6 @@ public class ArithmeticRel implements BValue {
 		type.prettyPrint(pp);
 		rValue.prettyPrint(pp);
 	}
+	
 	
 }

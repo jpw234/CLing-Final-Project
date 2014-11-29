@@ -19,4 +19,9 @@ public class Number implements NValue {
 		
 		//I changed this to reflect the addition of isInteger - Jared
 	}
+	
+	@Override
+	public VariableType inferType() {
+		return isInteger ? VariableType.INT : VariableType.DOUBLE;
+	}
 }

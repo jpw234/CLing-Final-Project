@@ -2,7 +2,7 @@ package ast;
 
 import pretty.PrettyPrinter;
 
-public class Bool implements BValue {
+public class Bool extends BValue {
 	private boolean value;
 	
 	public Bool(boolean val) {
