@@ -4,7 +4,6 @@ import pretty.PrettyPrinter;
 
 public class Variable extends BValue implements NValue {
 	private String name;
-	public VariableType type;
 	
 	public Variable(String n) {
 		name = n;
@@ -15,12 +14,13 @@ public class Variable extends BValue implements NValue {
 	}
 	
 	@Override
-	public VariableType inferType(){
-		if(type == null){
+	public VariableType inferType(PrettyPrinter pp){
+		VariableType t = pp.declaredVariables.get(pp);
+		if(t == null){
 			System.err.printf("Type inference on undeclared variable '{0}', assuming it is a double.\r\n", name);
 			return VariableType.DOUBLE;
 		}
-		return type;
+		return t;
 	}
 	
 	@Override

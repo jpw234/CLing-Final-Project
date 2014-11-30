@@ -21,7 +21,7 @@ public class ArithmeticOp implements NValue {
 	}
 
 	@Override
-	public VariableType inferType() {
-		return lValue.inferType() == VariableType.DOUBLE || rValue.inferType() == VariableType.DOUBLE ? VariableType.DOUBLE : VariableType.INT;
+	public VariableType inferType(PrettyPrinter pp) {
+		return lValue.inferType(pp) == VariableType.DOUBLE || rValue.inferType(pp) == VariableType.DOUBLE ? VariableType.DOUBLE : VariableType.INT;
 	}
 }

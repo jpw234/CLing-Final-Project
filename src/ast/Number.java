@@ -21,7 +21,7 @@ public class Number implements NValue {
 	}
 	
 	@Override
-	public VariableType inferType() {
+	public VariableType inferType(PrettyPrinter pp) {
 		return isInteger ? VariableType.INT : VariableType.DOUBLE;
 	}
 }

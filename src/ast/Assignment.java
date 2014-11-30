@@ -13,10 +13,10 @@ public class Assignment implements Command {
 	}
 	
 	public void prettyPrint(PrettyPrinter pp) {
-		if(pp.declaredVariables.contains(var)){
+		if(pp.declaredVariables.containsKey(var)){
 			var.prettyPrint(pp);
 		}else{
-			pp.declareVariable(var, val.inferType());
+			pp.declareVariable(var, val.inferType(pp));
 		}
 		pp.sb.append("= ");
 		val.prettyPrint(pp);

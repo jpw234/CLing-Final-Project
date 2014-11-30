@@ -1,7 +1,7 @@
 package pretty;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import ast.ArithmeticOp;
 import ast.ArithmeticOpType;
@@ -21,12 +21,12 @@ import ast.WhileBlock;
 public class PrettyPrinter {
 	public StringBuffer sb;
 	public int tabCount;
-	public Set<Variable> declaredVariables;
+	public Map<Variable, VariableType> declaredVariables;
 	
 	public PrettyPrinter(){
 		sb = new StringBuffer();
 		tabCount = 0;
-		declaredVariables = new HashSet<Variable>();
+		declaredVariables = new HashMap<Variable, VariableType>();
 	}
 	
 	public void endLine(){
@@ -67,8 +67,7 @@ public class PrettyPrinter {
 	}
 
 	public void declareVariable(Variable var, VariableType type) {
-		declaredVariables.add(var);
-		var.type = type;
+		declaredVariables.put(var, type);
 		type.prettyPrint(this);
 		var.prettyPrint(this);
 	}
