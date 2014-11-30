@@ -16,6 +16,10 @@ public class Variable extends BValue implements NValue {
 	
 	@Override
 	public VariableType inferType(){
+		if(type == null){
+			System.err.printf("Type inference on undeclared variable '{0}', assuming it is a double.\r\n", name);
+			return VariableType.DOUBLE;
+		}
 		return type;
 	}
 	

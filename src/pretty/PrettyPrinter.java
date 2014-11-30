@@ -42,7 +42,7 @@ public class PrettyPrinter {
 	public void semicolonEndline(){
 		sb.setCharAt(sb.length() - 1, ';');
 		endLine();
-	}
+	}	
 	
 	public static void main(String... args){
 		Program p = new Program();
@@ -52,7 +52,7 @@ public class PrettyPrinter {
 		then.addCommand(new PrintCommand(new Number(1, true)));
 		Program els = new Program();
 		Program whil = new Program();
-		whil.addCommand(new Assignment(new Variable("x"), new Number(5, false)));
+		whil.addCommand(new Assignment(new Variable("x"), new ArithmeticOp(new Number(1, true), new Number(5, false), ArithmeticOpType.DIVIDE)));
 		whil.addCommand(new Assignment(new Variable("y"), new Number(2, true)));
 		WhileBlock wb = new WhileBlock(new Bool(true), whil);
 		els.addCommand(wb);
