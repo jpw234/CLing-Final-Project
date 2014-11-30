@@ -2,7 +2,7 @@ package ast;
 
 import pretty.PrettyPrinter;
 
-public class BooleanOp implements BValue {
+public class BooleanOp extends BValue {
 	private BooleanOpType type;
 	private BValue lValue;
 	private BValue rValue;

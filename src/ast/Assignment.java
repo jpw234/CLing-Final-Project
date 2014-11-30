@@ -13,7 +13,11 @@ public class Assignment implements Command {
 	}
 	
 	public void prettyPrint(PrettyPrinter pp) {
-		var.prettyPrint(pp);
+		if(pp.declaredVariables.containsKey(var)){
+			var.prettyPrint(pp);
+		}else{
+			pp.declareVariable(var, val.inferType(pp));
+		}
 		pp.sb.append("= ");
 		val.prettyPrint(pp);
 		pp.semicolonEndline();

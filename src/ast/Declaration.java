@@ -13,19 +13,7 @@ public class Declaration implements Command {
 	}
 	
 	public void prettyPrint(PrettyPrinter pp) {
-		//TODO: Implement this
-		switch(type) {
-		case INT:
-			pp.sb.append("int ");
-		case DOUBLE:
-			pp.sb.append("double ");
-		case BOOL:
-			pp.sb.append("boolean ");
-		default:
-			//uh-oh
-		}
-		
-		var.prettyPrint(pp);
+		pp.declareVariable(var, type);
 		pp.semicolonEndline();
 	}
 }
