@@ -152,15 +152,19 @@ define of: Lp.p
 # for if block with more than 1 then so "if xequals zero then add one to x,multiply x by five..."
 #can treat "multiply x my five" as separate sentence but then when passing lambdacalc trees
 #to next stage keep punctuation , so indicates that the sentence is still inside the "if"
-#so use "and" to show block structire inside if
+#so use "and" to show block structire inside if, same for "while"
 define then:Lp.p
-define if: LpLq[if(p) -> q]
+#updates "if", now takes just 1 arg, the thing that goes into the if statement
+#what goes in to if block will be treated as separate sentences for lambda calc and parser
+define if:Lp[if(p)]
+#define if: LpLq[if(p) -> q]
 
 #after "if" separete sentemce with else
 define otherwise: LP[else(P)]
 
 #"while xi is greater than two ..." without "then" lets c how itll work
-define while: LpLq[while(p) -> q]
+define while: Lp [while(p)]
+#define while: LpLq[while(p) -> q]
 
 #boolean and, used in "x is greater that two and-t y is less than three"
 define and-t: LpLq[p & q]
