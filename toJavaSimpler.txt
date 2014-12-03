@@ -1,0 +1,855 @@
+Words as models
+
+# Constants for numbers and user named variables
+constants of type e : N0 N1 N2 N3 N4 N5 N6 N7 N8 N9 N10 N11 N12 N13 N14 N15 N16 N17 N18 N19 N20 N21 N22 N23 N24 N25 N26 N27 N28 N29 N30 N31 N32 N33 N34 N35 N36 N37 N38 N39 N40 N41 N42 N43 N44 N45 N46 N47 N48 N49 N50 N51 N52 N53 N54 N55 N56 N57 N58 N59 N60 N61 N62 N63 N64 N65 N66 N67 N68 N69 N70 N71 N72 N73 N74 N75 N76 N77 N78 N79 N80 N81 N82 N83 N84 N85 N86 N87 N88 N89 N90 N91 N92 N93 N94 N95 N96 N97 N98 N99 N100 N101 N102 N103 N104 N105 N106 N107 N108 N109 N110 N111 N112 N113 N114 N115 N116 N117 N118 N119 N120 N121 N122 N123 N124 N125 N126 N127 N128 N129 N130 N131 N132 N133 N134 N135 N136 N137 N138 N139 N140 N141 N142 N143 N144 N145 N146 N147 N148 N149 N150 N151 N152 N153 N154 N155 N156 N157 N158 N159 N160 N161 N162 N163 N164 N165 N166 N167 N168 N169 N170 N171 N172 N173 N174 N175 N176 N177 N178 N179 N180 N181 N182 N183 N184 N185 N186 N187 N188 N189 N190 N191 N192 N193 N194 N195 N196 N197 N198 N199 N200 X B V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16 V17 V18 V19 V20 V21 V22 V23 V24 V25 V26 V27 V28 V29 V30 V31 V32 V33 V34 V35 V36 V37 V38 V39 V40 V41 V42 V43 V44 V45 V46 V47 V48 V49 V50 V51 V52 V53 V54 V55 V56 V57 V58 V59 V60 V61 V62 V63 V64 V65 V66 V67 V68 V69 V70 V71 V72 V73 V74 V75 V76 V77 V78 V79 V80 V81 V82 V83 V84 V85 V86 V87 V88 V89 V90 V91 V92 V93 V94 V95 V96 V97 V98 V99 V100 V101 V102 V103 V104 V105 V106 V107 V108 V109 V110 V111 V112 V113 V114 V115 V116 V117 V118 V119 V120 V121 V122 V123 V124 V125 V126 V127 V128 V129 V130 V131 V132 V133 V134 V135 V136 V137 V138 V139 V140 V141 V142 V143 V144 V145 V146 V147 V148 V149 V150 V151 V152 V153 V154 V155 V156 V157 V158 V159 V160 V161 V162 V163 V164 V165 V166 V167 V168 V169 V170 V171 V172 V173 V174 V175 V176 V177 V178 V179 V180 V181 V182 V183 V184 V185 V186 V187 V188 V189 V190 V191 V192 V193 V194 V195 V196 V197 V198 V199 V200 S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11 S12 S13 S14 S15 S16 S17 S18 S19 S20 S21 S22 S23 S24 S25 S26 S27 S28 S29 S30 S31 S32 S33 S34 S35 S36 S37 S38 S39 S40 S41 S42 S43 S44 S45 S46 S47 S48 S49 S50 S51 S52 S53 S54 S55 S56 S57 S58 S59 S60 S61 S62 S63 S64 S65 S66 S67 S68 S69 S70 S71 S72 S73 S74 S75 S76 S77 S78 S79 S80 S81 S82 S83 S84 S85 S86 S87 S88 S89 S90 S91 S92 S93 S94 S95 S96 S97 S98 S99 S100 True False 
+# The adjacency relation.
+constants of type <e*e,t> : D
+constants of type <e,e> : C
+
+variables of type e : x y z
+variables of type <e,t> : P-Q
+variables of type t : p q o r
+variables of type <e,et> : R
+variables of type <et,t> : T
+variables of type <<et,t>,e> : W
+variables of type <<e,et>,et> : S
+variables of type <e,<t,t>>: Z
+
+#variables of type <<e,et>,t>: J
+#variables of type <e,<<e,et>,t>>: I
+#no work
+#variables of type <e,<e,<<e,et>,t>>> : O
+#variables of type <e,<e<<e,e>,t>>> : O
+
+multiple letter identifiers
+
+use rule function application
+use rule non-branching nodes
+use rule predicate modification
+use rule lambda abstraction
+
+#simple (int operation int)
+define set: LxLy[assign(x,y)]
+define multiply: LxLy[multiply(x,y)]
+define times: LxLy[multiply(x,y)] 
+define divide: LxLy[divide(x,y)]
+define divided: LxLy[divide(x,y)]
+define twice: Lx [multiply(N2,x)]
+#for add one to x so 1+x
+define add:LxLy[add(x,y)]
+#for set x to y plus z so x= y+z
+define plus: LxLy [add(x,y)]
+# subtract 3 from y so y-3 
+define subtract: LxLy [subtract(y,x)]
+#ex: set x to x minus y  if tree is [x [[minus][y]]]--> also similar situation in point(x,y)
+#where i assume a different parse, in the future may be better to choose 1 kind of parse and stick to it
+#note then will have to rewrite definition for either minus or point
+define minus:LyLx[subtract(x,y)]
+#x is greater than 3 --> x is greater(y,N3)-->greater(x,N3)
+define greater:LxLy[greater(y,x)]
+define less:LxLy [less(y,x)]
+define equal:LxLy[equal(y,x)]
+#remainder of x divided by y
+define remainder: Lp[mod(p)]
+#not sure how tree will look bu this one works with tree being [[x modulo] y]
+define modulo: LxLy[mod(x,y)]
+
+#add or subtract 1 to/from integers only
+define increment: Lx[add(N1,x)]
+define decrement: Lx[subtract(x,N1)]
+#if want to do operators on negative numbers then need
+#the complex multiple operator expressions below
+#for integers
+define negative: Lx[negative(x)]
+#for doubles
+define negative-t: Lp[negative(p)]
+
+#assignment like x=12*31 or x=point(1,5)
+define set-t:LxLp[assign(x,p)]
+
+#complex multiple operator expressions...probably will not do
+#this because then operator precedence ambiguity
+#eg "divide two by x times three" could be (2/x)*3 
+#but the person may have meant 2/(x*3) or vice versa
+#actually these are very useful for operations on doubles!
+#so keep these definitions but still don't want to
+#allow more than 1 operation at a time
+
+#(int operation double)
+define multiply-et: LxLp[multiply(x,p)]
+define times-et: LxLp[multiply(x,p)] 
+define divide-et:LxLp[divide(x,p)]
+define divided-et:LxLp[divide(x,p)]
+define add-et:LxLp[add(x,p)]
+#for set x to y plus z so x=y+z
+define plus-et: LxLp[add(x,p)]
+#subtract x from p so p-x
+define subtract-et:LxLp[subtract(p,x)]
+#x-p
+define minus-et:LxLp[subtract(x,p)]
+#p is [greater than x]
+define greater-et:LxLp[greater(p,x)]
+define less-et:LxLp [less(p,x)]
+define equal-et:LxLp[equal(p,x)]
+
+#also LpLx  (double operation int)
+define multiply-te: LpLx[multiply(p,x)]
+define times-te: LpLx[multiply(p,x)] 
+define divide-te:LpLx[divide(p,x)]
+define divided-te:LpLx[divide(p,x)]
+define add-te:LpLx[add(p,x)]
+define plus-te: LpLx[add(p,x)]
+#subtract p from x  (x-p)
+define subtract-te:LpLx[subtract(x,p)]
+#p - x
+define minus-te:LpLx[subtract(p,x)]
+#x is [greater than p]
+define greater-te:LpLx[greater(x,p)]
+define less-te:LpLx[less(x,p)]
+define equal-te:LpLx[equal(x,p)]
+
+#now LpLq  (double operation double)
+define multiply-tt: LpLq[multiply(p,q)]
+define times-tt: LpLq[multiply(p,q)] 
+define divide-tt:LpLq[divide(p,q)]
+define divided-tt:LpLq[divide(p,q)]
+define add-tt:LpLq[add(p,q)]
+define plus-tt: LpLq[add(p,q)]
+#subtract p from q  (q-p)
+define subtract-tt:LpLq[subtract(q,p)]
+#p - q
+define minus-tt:LpLq[subtract(p,q)]
+#p is greater than q  --i took into account tree structure and that q goes into greater(x,y) first
+define greater-tt:LqLp[greater(p,q)]
+define less-tt:LqLp[less(p,q)]
+define equal-tt:LqLp[equal(q,p)]
+define modolo-tt: LpLq[mod(p,q)] 
+
+# so three point five --> point(N3,N5)
+#same prblm as minus [x [point y]] or [[x point]y]--i assumed [[x point] y]
+define point: LxLy[point(x,y)]
+
+
+
+# The preposition "to" is the constant function on 
+# individuals.
+define by: Lx.x
+define by-t:Lp.p
+define to: Lx.x
+define to-t: Lp.p
+define than:Lx.x
+define than-t:Lp.p
+define from:Lx.x
+define of: Lp.p
+# "is" and "a" are constant function on sets of individuals--later may change these to lx.x or lp.p
+#define is: LP.P
+#define a: LP.P
+# x and y are greater than three
+#define are : LP.P
+
+
+#if (bool) then so say "if x is greater than two then ..."
+# for if block with more than 1 then so "if xequals zero then add one to x,multiply x by five..."
+#can treat "multiply x my five" as separate sentence but then when passing lambdacalc trees
+#to next stage keep punctuation , so indicates that the sentence is still inside the "if"
+#so use "and" to show block structire inside if, same for "while"
+define then:Lp.p
+#updates "if", now takes just 1 arg, the thing that goes into the if statement
+#what goes in to if block will be treated as separate sentences for lambda calc and parser
+define if:Lp[if(p)]
+#define if: LpLq[if(p) -> q]
+
+#after "if" separete sentemce with else
+define otherwise: LP[else(P)]
+
+#"while xi is greater than two ..." without "then" lets c how itll work
+define while: Lp [while(p)]
+#define while: LpLq[while(p) -> q]
+
+#boolean and, used in "x is greater that two and-t y is less than three"
+define and-t: LpLq[p & q]
+
+#boolean or, used in "x is greater that two or-t y is less than three"
+define or-t:LpLq [p V q]
+
+# Words naming integers
+define   zero: N0
+define    one: N1
+define   two: N2
+define   three: N3
+define    four: N4
+define    five: N5
+define    six: N6
+define     seven: N7
+define    eight: N8
+define    nine: N9
+define    ten: N10
+define    eleven: N11
+define   twelve: N12
+define   thirteen: N13
+define    fourteen: N14
+define   fifteen: N15
+define   sixteen: N16
+define   seventeen: N17
+define    eighteen: N18
+define    nineteen: N19
+define   twenty: N20
+define    twenty-one: N21
+define    twenty-two: N22
+define    twenty-three: N23
+define    twenty-four: N24
+define    twenty-five: N25
+define   twenty-six: N26
+define   twenty-seven: N27
+define   twenty-eight: N28
+define  twenty-nine: N29
+define  thirty: N30
+define  thirty-one: N31
+define thirty-two: N32
+define thirty-three: N33
+define thirty-four: N34
+define thirty-five: N35
+define thirty-six: N36
+define thirty-seven: N37
+define thirty-eight: N38
+define thirty-nine: N39
+define forty: N40
+define forty-one: N41
+define forty-two: N42
+define forty-three: N43
+define forty-four: N44
+define forty-five: N45
+define forty-six: N46
+define forty-seven: N47
+define forty-eight: N48
+define forty-nine: N49
+define fifty: N50
+define fifty-one: N51
+define fifty-two: N52
+define fifty-three: N53
+define fifty-four: N54
+define fifty-five: N55
+define fifty-six: N56
+define fifty-seven: N57
+define fifty-eight: N58
+define fifty-nine: N59
+define sixty: N60
+define sixty-one: N61
+define sixty-two: N62
+define sixty-three: N63
+define sixty-four: N64
+define sixty-five: N65
+define sixty-six: N66
+define sixty-seven: N67
+define sixty-eight: N68
+define sixty-nine: N69
+define seventy: N70
+define seventy-one: N71
+define seventy-two: N72
+define seventy-three: N73
+define seventy-four: N74
+define seventy-five: N75
+define seventy-six: N76
+define seventy-seven: N77
+define seventy-eight: N78
+define seventy-nine: N79
+define eighty: N80
+define eighty-one: N81
+define eighty-two: N82
+define eighty-three: N83
+define eighty-four: N84
+define eighty-five: N85
+define eighty-six: N86
+define eighty-seven: N87
+define eighty-eight: N88
+define eighty-nine: N89
+define ninety: N90
+define ninety-one: N91
+define ninety-two: N92
+define ninety-three: N93
+define ninety-four: N94
+define ninety-five: N95
+define ninety-six: N96
+define ninety-seven: N97
+define ninety-eight: N98
+define ninety-nine: N99
+define N1: N1
+define N2: N2
+define N3: N3
+define N4: N4
+define N5: N5
+define N6: N6
+define N7: N7
+define N8: N8
+define N9: N9
+define N10: N10
+define N11: N11
+define N12: N12
+define N13: N13
+define N14: N14
+define N15: N15
+define N16: N16
+define N17: N17
+define N18: N18
+define N19: N19
+define N20: N20
+define N21: N21
+define N22: N22
+define N23: N23
+define N24: N24
+define N25: N25
+define N26: N26
+define N27: N27
+define N28: N28
+define N29: N29
+define N30: N30
+define N31: N31
+define N32: N32
+define N33: N33
+define N34: N34
+define N35: N35
+define N36: N36
+define N37: N37
+define N38: N38
+define N39: N39
+define N40: N40
+define N41: N41
+define N42: N42
+define N43: N43
+define N44: N44
+define N45: N45
+define N46: N46
+define N47: N47
+define N48: N48
+define N49: N49
+define N50: N50
+define N51: N51
+define N52: N52
+define N53: N53
+define N54: N54
+define N55: N55
+define N56: N56
+define N57: N57
+define N58: N58
+define N59: N59
+define N60: N60
+define N61: N61
+define N62: N62
+define N63: N63
+define N64: N64
+define N65: N65
+define N66: N66
+define N67: N67
+define N68: N68
+define N69: N69
+define N70: N70
+define N71: N71
+define N72: N72
+define N73: N73
+define N74: N74
+define N75: N75
+define N76: N76
+define N77: N77
+define N78: N78
+define N79: N79
+define N80: N80
+define N81: N81
+define N82: N82
+define N83: N83
+define N84: N84
+define N85: N85
+define N86: N86
+define N87: N87
+define N88: N88
+define N89: N89
+define N90: N90
+define N91: N91
+define N92: N92
+define N93: N93
+define N94: N94
+define N95: N95
+define N96: N96
+define N97: N97
+define N98: N98
+define N99: N99
+define N100: N100
+define N101: N101
+define N102: N102
+define N103: N103
+define N104: N104
+define N105: N105
+define N106: N106
+define N107: N107
+define N108: N108
+define N109: N109
+define N110: N110
+define N111: N111
+define N112: N112
+define N113: N113
+define N114: N114
+define N115: N115
+define N116: N116
+define N117: N117
+define N118: N118
+define N119: N119
+define N120: N120
+define N121: N121
+define N122: N122
+define N123: N123
+define N124: N124
+define N125: N125
+define N126: N126
+define N127: N127
+define N128: N128
+define N129: N129
+define N130: N130
+define N131: N131
+define N132: N132
+define N133: N133
+define N134: N134
+define N135: N135
+define N136: N136
+define N137: N137
+define N138: N138
+define N139: N139
+define N140: N140
+define N141: N141
+define N142: N142
+define N143: N143
+define N144: N144
+define N145: N145
+define N146: N146
+define N147: N147
+define N148: N148
+define N149: N149
+define N150: N150
+define N151: N151
+define N152: N152
+define N153: N153
+define N154: N154
+define N155: N155
+define N156: N156
+define N157: N157
+define N158: N158
+define N159: N159
+define N160: N160
+define N161: N161
+define N162: N162
+define N163: N163
+define N164: N164
+define N165: N165
+define N166: N166
+define N167: N167
+define N168: N168
+define N169: N169
+define N170: N170
+define N171: N171
+define N172: N172
+define N173: N173
+define N174: N174
+define N175: N175
+define N176: N176
+define N177: N177
+define N178: N178
+define N179: N179
+define N180: N180
+define N181: N181
+define N182: N182
+define N183: N183
+define N184: N184
+define N185: N185
+define N186: N186
+define N187: N187
+define N188: N188
+define N189: N189
+define N190: N190
+define N191: N191
+define N192: N192
+define N193: N193
+define N194: N194
+define N195: N195
+define N196: N196
+define N197: N197
+define N198: N198
+define N199: N199
+define N200: N200
+
+
+#variables user will use, in future think about extending so user can create variable names
+#V1 thru V200
+define x:X
+define b:B
+define V1: V1
+define V2: V2
+define V3: V3
+define V4: V4
+define V5: V5
+define V6: V6
+define V7: V7
+define V8: V8
+define V9: V9
+define V10: V10
+define V11: V11
+define V12: V12
+define V13: V13
+define V14: V14
+define V15: V15
+define V16: V16
+define V17: V17
+define V18: V18
+define V19: V19
+define V20: V20
+define V21: V21
+define V22: V22
+define V23: V23
+define V24: V24
+define V25: V25
+define V26: V26
+define V27: V27
+define V28: V28
+define V29: V29
+define V30: V30
+define V31: V31
+define V32: V32
+define V33: V33
+define V34: V34
+define V35: V35
+define V36: V36
+define V37: V37
+define V38: V38
+define V39: V39
+define V40: V40
+define V41: V41
+define V42: V42
+define V43: V43
+define V44: V44
+define V45: V45
+define V46: V46
+define V47: V47
+define V48: V48
+define V49: V49
+define V50: V50
+define V51: V51
+define V52: V52
+define V53: V53
+define V54: V54
+define V55: V55
+define V56: V56
+define V57: V57
+define V58: V58
+define V59: V59
+define V60: V60
+define V61: V61
+define V62: V62
+define V63: V63
+define V64: V64
+define V65: V65
+define V66: V66
+define V67: V67
+define V68: V68
+define V69: V69
+define V70: V70
+define V71: V71
+define V72: V72
+define V73: V73
+define V74: V74
+define V75: V75
+define V76: V76
+define V77: V77
+define V78: V78
+define V79: V79
+define V80: V80
+define V81: V81
+define V82: V82
+define V83: V83
+define V84: V84
+define V85: V85
+define V86: V86
+define V87: V87
+define V88: V88
+define V89: V89
+define V90: V90
+define V91: V91
+define V92: V92
+define V93: V93
+define V94: V94
+define V95: V95
+define V96: V96
+define V97: V97
+define V98: V98
+define V99: V99
+define V100: V100
+define V101: V101
+define V102: V102
+define V103: V103
+define V104: V104
+define V105: V105
+define V106: V106
+define V107: V107
+define V108: V108
+define V109: V109
+define V110: V110
+define V111: V111
+define V112: V112
+define V113: V113
+define V114: V114
+define V115: V115
+define V116: V116
+define V117: V117
+define V118: V118
+define V119: V119
+define V120: V120
+define V121: V121
+define V122: V122
+define V123: V123
+define V124: V124
+define V125: V125
+define V126: V126
+define V127: V127
+define V128: V128
+define V129: V129
+define V130: V130
+define V131: V131
+define V132: V132
+define V133: V133
+define V134: V134
+define V135: V135
+define V136: V136
+define V137: V137
+define V138: V138
+define V139: V139
+define V140: V140
+define V141: V141
+define V142: V142
+define V143: V143
+define V144: V144
+define V145: V145
+define V146: V146
+define V147: V147
+define V148: V148
+define V149: V149
+define V150: V150
+define V151: V151
+define V152: V152
+define V153: V153
+define V154: V154
+define V155: V155
+define V156: V156
+define V157: V157
+define V158: V158
+define V159: V159
+define V160: V160
+define V161: V161
+define V162: V162
+define V163: V163
+define V164: V164
+define V165: V165
+define V166: V166
+define V167: V167
+define V168: V168
+define V169: V169
+define V170: V170
+define V171: V171
+define V172: V172
+define V173: V173
+define V174: V174
+define V175: V175
+define V176: V176
+define V177: V177
+define V178: V178
+define V179: V179
+define V180: V180
+define V181: V181
+define V182: V182
+define V183: V183
+define V184: V184
+define V185: V185
+define V186: V186
+define V187: V187
+define V188: V188
+define V189: V189
+define V190: V190
+define V191: V191
+define V192: V192
+define V193: V193
+define V194: V194
+define V195: V195
+define V196: V196
+define V197: V197
+define V198: V198
+define V199: V199
+define V200: V200
+#strings 1 thru 100
+define S1: S1
+define S2: S2
+define S3: S3
+define S4: S4
+define S5: S5
+define S6: S6
+define S7: S7
+define S8: S8
+define S9: S9
+define S10: S10
+define S11: S11
+define S12: S12
+define S13: S13
+define S14: S14
+define S15: S15
+define S16: S16
+define S17: S17
+define S18: S18
+define S19: S19
+define S20: S20
+define S21: S21
+define S22: S22
+define S23: S23
+define S24: S24
+define S25: S25
+define S26: S26
+define S27: S27
+define S28: S28
+define S29: S29
+define S30: S30
+define S31: S31
+define S32: S32
+define S33: S33
+define S34: S34
+define S35: S35
+define S36: S36
+define S37: S37
+define S38: S38
+define S39: S39
+define S40: S40
+define S41: S41
+define S42: S42
+define S43: S43
+define S44: S44
+define S45: S45
+define S46: S46
+define S47: S47
+define S48: S48
+define S49: S49
+define S50: S50
+define S51: S51
+define S52: S52
+define S53: S53
+define S54: S54
+define S55: S55
+define S56: S56
+define S57: S57
+define S58: S58
+define S59: S59
+define S60: S60
+define S61: S61
+define S62: S62
+define S63: S63
+define S64: S64
+define S65: S65
+define S66: S66
+define S67: S67
+define S68: S68
+define S69: S69
+define S70: S70
+define S71: S71
+define S72: S72
+define S73: S73
+define S74: S74
+define S75: S75
+define S76: S76
+define S77: S77
+define S78: S78
+define S79: S79
+define S80: S80
+define S81: S81
+define S82: S82
+define S83: S83
+define S84: S84
+define S85: S85
+define S86: S86
+define S87: S87
+define S88: S88
+define S89: S89
+define S90: S90
+define S91: S91
+define S92: S92
+define S93: S93
+define S94: S94
+define S95: S95
+define S96: S96
+define S97: S97
+define S98: S98
+define S99: S99
+define S100: S100
+#booleans
+define true: True
+define false: False
+
+# negation for bools x not equal to...
+define not: LP[not(P)]
+
+#declaring
+define declare: Lp.p
+define a: Lp.p
+define an: Lp.p
+define integer: Lx [int(x)]
+define double: Lx [double(x)]
+define boolean: Lx [bool(x)]
+
+#printing and returning
+define print: Lx[print(x)]
+define print-t: Lp[print(p)]
+define return:Lx[return(x)]
+define return-t:Lp[return(p)]
+
+exercise tree
+title e1
+directions set x to two
+
+[[.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set][.NNP.p.- x]][.PP.nvd.to.np [.TO to][.NP.nvd.base.-.-.-.- [.CD two]]]]]
+
+title e2
+directions set y to twice x
+[[.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set-t][.NNP.p.- b]][.PP.nvd.to.np [.TO to-t][.NP.nvd.base.-.-.-.- [.NNP.-.- twice][.NNP.-.- x]]]]]
+
+title e3
+directions multiply x by two
+
+#[result[ [[ multiply][[ [ x]] [[ by-r][ [ two]]]]]]]
+[[[ [[ multiply][ [ x]] ]][[ by][ [ two]]]]]
+
+title e4
+directions subtract three form x
+
+[[[[[subtract] [[N3]]]  [[from]  [[x]]]]]]
+
+
+title e5
+directions x is greater than three
+
+[[[[x]][[ is] [[[greater][[than] [three]]]]]]]
+
+title e6
+directions set x to true
+
+[ [[[set][x]][ [to][[true]]]]]
+
+title e7
+directions if x is equal to three then set x to one
+
+#doesnt work [result[[if][[[x]][[ is][[equal][[to][[ three]]]][[ then][[set][[[x]][[[to-r][[ one]]]]]]]]]]]
+
+# complicated braket deletion and insertion
+[[[[if][[[x]][[ is][[equal][[to][[ three]]]]]]][[ then][[[set][[x]]][[[to][[ one]]]]]]]]
+
+title e8
+directions x divided by x
+
+[[[[ x] [divided]] [[by] [[ x]]]]]
+
+title e9
+
+[[[[[set-t][[x]]] [[to-t] [[[ three][point]] [two]]]]]]
+
+title e10
+[[[[set-t][x]][[to-t][[thirty][[plus][forty-seven]]]]]]
+

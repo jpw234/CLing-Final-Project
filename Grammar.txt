@@ -1,0 +1,15 @@
+This is just a file which holds our agreed-upon grammar for the project.
+I just wanted to add it so that we had it formalized somewhere as a reference, and since
+I've made a few changes as issues have arisen, it seems like a good idea.
+
+Program = 		Command*
+
+Command = 		Assign(Variable, Value) | If(bValue, Program, (Program)) |
+				While(bValue, Program) | Print(Value) | Declare(Type, Variable)
+
+Value = 		nValue | bValue			//More will be added as we add more types, in particular Strings
+
+nValue = 		Variable | ArithmeticOp(AOpType, nValue, nValue) | int | double
+
+bValue = 		Variable | BooleanOp(BOpType, bValue, bValue) |
+				ArithmeticRel(ARelType, nValue, nValue) | bool
