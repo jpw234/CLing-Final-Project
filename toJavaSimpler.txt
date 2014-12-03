@@ -123,7 +123,7 @@ define minus-tt:LpLq[subtract(p,q)]
 define greater-tt:LqLp[greater(p,q)]
 define less-tt:LqLp[less(p,q)]
 define equal-tt:LqLp[equal(q,p)]
-define modolo-tt: LpLq[mod(p,q)] 
+define modulo-tt: LpLq[mod(p,q)] 
 
 # so three point five --> point(N3,N5)
 #same prblm as minus [x [point y]] or [[x point]y]--i assumed [[x point] y]
