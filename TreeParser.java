@@ -31,6 +31,10 @@ public class TreeParser {
 			next = input.nextLine();
 		}
 		input.close();
+		//+integer, double as well as declare ex: "declare integer x"
+		//also put in the method that breaks string into sentences
+		//now left to tag words w types and send all sentences (excluding brackets) from array/or is it string
+		//to lambda calculator
 	}
 	
 	public static String auto_parens(String str){
@@ -169,8 +173,8 @@ public class TreeParser {
 	public static String recbracket(String str){
 		String[] tmp = str.split("\\s+");
 		String[] comparator = new String[]{"greater", "equal", "less"};
-		String[] unary_ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement"};
-		String[] short_ops = new String[]{"times", "plus", "minus", "mod"};
+		String[] unary_ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement", "remainder","integer","boolean","double","string"};
+		String[] short_ops = new String[]{"times", "plus", "minus", "modulo"};
 		String[] long_ops = new String[]{"multiply", "add", "subtract", "divide"};
 		String[] passive_ops = new String[]{"multipled", "divided", "added", "subtracted"};
 		int comparator_i = lists_search(tmp, comparator);
@@ -268,7 +272,7 @@ public class TreeParser {
 	
 	public static String ops_short(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"times", "plus", "minus", "mod"};
+		String[] ops = new String[]{"times", "plus", "minus", "modulo"};
 		int op_i = lists_search(tmp, ops);
 		if(op_i > -1 && tmp.length > op_i + 1){
 			return "[" + recbracket(recombine(tmp," ",0,op_i)) + " [["+ tmp[op_i] + "] " + recbracket(recombine(tmp," ", op_i+1, tmp.length)) + "]]";
@@ -282,7 +286,7 @@ public class TreeParser {
 	public static String ops_long(String str){
 		String[] tmp = str.split("\\s+");
 		String[] ops = new String[]{"multiply", "add", "subtract", "divide"};
-		String[] cmpwords = new String[]{"by", "to", "from"};
+		String[] cmpwords = new String[]{"by", "to", "from","of"};
 		int op_i = lists_search(tmp, ops);
 		int word_i = lists_search(tmp, cmpwords);
 		if(op_i == 0 && word_i > -1 & tmp.length > word_i + 1){
@@ -297,7 +301,7 @@ public class TreeParser {
 	public static String passive_ops(String str){
 		String[] tmp = str.split("\\s+");
 		String[] ops = new String[]{"multipled", "divided", "added", "subtracted"};
-		String[] cmpwords = new String[]{"by", "to", "from"};
+		String[] cmpwords = new String[]{"by", "to", "from","of"};
 		int op_i = lists_search(tmp, ops);
 		int word_i = lists_search(tmp, cmpwords);
 		if(op_i > -1 && word_i > -1 && op_i + 1 == word_i){
@@ -309,7 +313,7 @@ public class TreeParser {
 	
 	public static String unary_ops(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement"};
+		String[] ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement","remainder","integer","boolean","double","string"};
 		int op_i = lists_search(tmp, ops);
 		if(op_i == 0 && tmp.length > op_i + 1){
 			return "[[" + tmp[0] + "] " + recbracket(recombine(tmp, " ", 1, tmp.length)) + "]";
