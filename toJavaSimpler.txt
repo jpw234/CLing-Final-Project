@@ -140,10 +140,14 @@ define to-t: Lp.p
 define than:Lx.x
 define than-t:Lp.p
 define from:Lx.x
-define of: Lp.p
+define from-t:Lp.p
+define of: Lx.x
+define of-t: Lp.p
 # "is" and "a" are constant function on sets of individuals--later may change these to lx.x or lp.p
 #define is: LP.P
 #define a: LP.P
+
+#look at this later
 # x and y are greater than three
 #define are : LP.P
 
