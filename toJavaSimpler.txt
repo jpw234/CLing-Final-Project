@@ -144,7 +144,8 @@ define from-t:Lp.p
 define of: Lx.x
 define of-t: Lp.p
 # "is" and "a" are constant function on sets of individuals--later may change these to lx.x or lp.p
-#define is: LP.P
+define is: LP.P
+
 #define a: LP.P
 
 #look at this later
@@ -798,6 +799,7 @@ define an: Lp.p
 define integer: Lx [int(x)]
 define double: Lx [double(x)]
 define boolean: Lx [bool(x)]
+define string: Lx[string(x)]
 
 #printing and returning
 define print: Lx[print(x)]
