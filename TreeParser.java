@@ -1,8 +1,15 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class TreeParser {
+	public static Map<String,String> strings= new HashMap<String,String>(100);
+	public static int currentnumStrings=0;
+	public static Map<String,Integer> integers= new HashMap<String,Integer>(200);
+	public static int currentnumIntegers=0;
+	
 	public static void main(String args[]){
 		Scanner input = new Scanner(System.in);
 		ArrayList<String> totaloutput = new ArrayList<String>();
@@ -26,6 +33,13 @@ public class TreeParser {
 						totaloutput.add(exp);
 					}
 				}
+				//store doubles
+				//problem---how to then store integers---mayb ont replace right away but
+				//note the index of the double  and then after storing integers insert the doubles as well?
+				//store integers
+				storeIntegers(totaloutput);
+				//store strings
+				storeStrings(totaloutput);
 				System.out.println(totaloutput);
 			}
 			next = input.nextLine();
@@ -36,6 +50,87 @@ public class TreeParser {
 		//now left to tag words w types and send all sentences (excluding brackets) from array/or is it string
 		//to lambda calculator
 	}
+	
+	private static void storeStrings(ArrayList<String> a){
+		for (int i=0;i<a.size();i++){
+			//String thisOne=a.get(i);//original string
+			//replace any string with s1/2/etc
+			for (int c=0;c<a.get(i).length();c++){
+				//System.out.println(c);
+			    if (a.get(i).charAt(c)=='"'){
+			    	int start=c;
+			    	//System.out.println(start);
+			    	int end=c;
+			    	String s="";
+			    	for(int z=c+1;z<a.get(i).length();z++){
+			    		//System.out.println("aqui");
+			    		if(a.get(i).charAt(z)!='"')
+			    			s+=a.get(i).charAt(z);
+			    		else {end=z;break;}
+			    	}
+			    	currentnumStrings++;
+			    	String tag="S";
+			        tag+=currentnumStrings;
+			        //puts the string and its tag into the map
+			    	strings.put(tag,s);
+			    	//replaces the string with the tag in the original string
+			    	//System.out.println("start"+start);
+			    	String switchesTo=a.get(i).substring(0,start)+tag+a.get(i).substring(end+1,a.get(i).length());
+			    	//System.out.println(switchesTo);
+			    	//System.out.println("eeeee: "+a.get(i));
+			    	a.set(i,switchesTo);
+			    	//System.out.println("mmmm: "+a.get(i));
+			    	c=start+tag.length();
+			    	//System.out.println("new c "+c);
+			    }
+			}
+		}
+	}
+	
+	
+	private static void storeIntegers(ArrayList<String> a){
+		for (int i=0;i<a.size();i++){
+			//String thisOne=a.get(i);//original string
+			//replace any string with s1/2/etc
+			for (int c=0;c<a.get(i).length();c++){
+				//System.out.println(c);
+			    if (Character.isDigit(a.get(i).charAt(c))){
+			    	int start=c;
+			    	//System.out.println(start);
+			    	String s="";
+			    	s+=a.get(i).charAt(c);
+			    	int end=c;
+			    	for(int z=c+1;z<a.get(i).length();z++){
+			    		//System.out.println("aqui");
+			    		if(Character.isDigit(a.get(i).charAt(z)))
+			    			s+=a.get(i).charAt(z);
+			    		else {end=z;break;}
+			    	}
+			    	//to not confuse integers with variables V1-V200 or other integers already replaced or strings already replaced
+			    	if(a.get(i).charAt(c-1)!='V' && a.get(i).charAt(c-1)!='N'&& a.get(i).charAt(c-1)!='S'){
+			    	currentnumIntegers++;
+			    	String tag="N";
+					tag+=currentnumIntegers;
+			        //puts the string and its tag into the map
+			    	integers.put(tag,Integer.parseInt(s));
+			    	//replaces the string with the tag in the original string
+			    	//System.out.println("start"+start);
+			    	String switchesTo=a.get(i).substring(0,start)+tag+a.get(i).substring(end,a.get(i).length());
+			    	//System.out.println(switchesTo);
+			    	//System.out.println("eeeee: "+a.get(i));
+			    	a.set(i,switchesTo);
+			    	//System.out.println("mmmm: "+a.get(i));
+			    	c=start+tag.length();
+			    	//System.out.println("new c "+c);
+			    	}
+			    	else{
+			    		c=end;
+			    	}
+			    }
+			}
+		}
+	}
+	
 	
 	public static String auto_parens(String str){
 		String[] tmp = str.split("\\s+");
@@ -324,3 +419,4 @@ public class TreeParser {
 		return "";
 	}
 }
+
