@@ -45,10 +45,12 @@ public class TreeParser {
 			next = input.nextLine();
 		}
 		input.close();
-		//+integer, double as well as declare ex: "declare integer x"
-		//also put in the method that breaks string into sentences
-		//now left to tag words w types and send all sentences (excluding brackets) from array/or is it string
-		//to lambda calculator
+		//declare ex: "declare integer x"
+		//now left to 0.figure out the issue with doubles
+		//1.tag words w types and
+		//2.send all sentences (excluding brackets) from array to lambda calculator, 
+		//3.get output, 
+		//4.put back all the stored values
 	}
 	
 	private static void storeStrings(ArrayList<String> a){
