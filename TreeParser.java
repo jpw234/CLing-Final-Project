@@ -345,7 +345,7 @@ public class TreeParser {
 	public static String setvar(String str){
 		String[] tmp = str.split("\\s+");
 		if(tmp.length > 3 && tmp[0].equals("set") && tmp[2].equals("to")){
-			return "[[set] [" + tmp[1] + "]] [[to] " + recbracket(recombine(tmp," ", 3, tmp.length)) + "]";
+			return "[[[set] [" + tmp[1] + "]] [[to] " + recbracket(recombine(tmp," ", 3, tmp.length)) + "]]";
 		}
 		System.out.println("needs correct syntax for set");
 		return "";
