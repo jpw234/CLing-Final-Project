@@ -149,55 +149,62 @@ public class TreeParser {
 		}
 	}
 	
-	
+	//will always create a valid group of parentheses if omitted, may not give a desired grouping though
+	//will not fix incorrectly inserted parenthesis though (make sure to parenthesize correctly)
+	//the 'then' keyword is no longer required, but still can be used
 	public static String auto_parens(String str){
 		String[] tmp = str.split("\\s+");
-		int then_i = arrayfind(tmp, "then");
-		int otherwise_i = arrayfind(tmp, "otherwise");
-		if(otherwise_i == -1){
-			otherwise_i = arrayfind(tmp, "else");
-		}
-		String left_then = then_i + 1 < tmp.length && then_i > -1 ? tmp[then_i] + tmp[then_i+1] : tmp[Math.max(0, then_i)];
-		String right_then = otherwise_i > -1 && tmp.length > 1 ? tmp[otherwise_i-1] + tmp[otherwise_i] : tmp[tmp.length-1];
-		String left_else = otherwise_i < tmp.length - 1 && otherwise_i > -1 ? tmp[otherwise_i] + tmp[otherwise_i+1] : tmp[Math.max(0, otherwise_i)];
-		String right_else = tmp[tmp.length - 1];
+		String[] cmds = new String[]{"(if", "(while", "return", "print", "increment", "decrement", "set", "multiply", "add", "subtract", "divide", "declare", "remainder"};
 		String result = "";
-		if(then_i > -1 && otherwise_i > -1){
-			for(int i=0; i<tmp.length; i++){
-				result = result + " ";
-				if(i == then_i && !left_then.contains("(")){
-					result = result + tmp[i] + " (";
-				} else if (i == otherwise_i){
-					if(!left_else.contains("(") && !right_then.contains(")")){
-						result = result + " ) " + tmp[i] + " (";
-					} else if (!left_else.contains("(")){
-						result = result + tmp[i] + " (";
-					} else if (!right_then.contains(")")){
-						result = result + " )" + tmp[i];
-					} else {
-						result = result + tmp[i];
+		String tmpcombined = "";
+		int parenscnt = 0;
+		int ifcnt = 0;
+		for(int i=1; i<tmp.length; i++){
+			if(tmp[i-1].equals("if") || tmp[i-1].equals("while")){
+				ifcnt++;
+				result = result + " " + tmp[i-1];
+			} else if(tmp[i].equals("else") || tmp[i].equals("otherwise")){
+				String tmpelse = " else";
+				tmpcombined = tmp[i-1] + tmp[i];
+				if(!tmpcombined.contains(")")){
+					tmpelse = " )" + tmpelse;
+					parenscnt--;
+				}
+				if(i < tmp.length-1){
+					tmpcombined = tmp[i] + tmp[i+1];
+					if(!tmpcombined.contains("(")){
+						tmpelse = tmpelse + " (";
+						parenscnt++;
 					}
-				} else if (i == tmp.length - 1 && !right_else.contains(")")){
-					result = result + tmp[i] + " )";
+				}
+				result = result + " " + tmp[i-1] + tmpelse;
+				i++;
+			} else {
+				tmpcombined = tmp[i-1] + tmp[i];
+				if(!tmpcombined.contains("(")){
+					if(arrayfind(cmds, tmp[i]) > -1 && ifcnt > 0){
+						result = result + " " + tmp[i-1] + " (";
+						parenscnt++;
+						ifcnt--;
+					} else if (tmp[i].equals("if") || tmp[i].equals("while")){
+						result = result + " " + tmp[i-1] + " ( " + tmp[i];
+						parenscnt++;
+						i++;
+					} else {
+						result = result + " " + tmp[i-1];
+					}
 				} else {
-					result = result + tmp[i];
+					result = result + " " + tmp[i-1];
+					ifcnt--;
 				}
 			}
-			return result;
-		} else if (then_i > -1){
-			for(int i=0; i<tmp.length; i++){
-				result = result + " ";
-				if(i == then_i && !left_then.contains("(")){
-					result = result + tmp[i] + " (";
-				} else if (i == tmp.length - 1 && !right_else.contains(")") && !left_then.contains("(")){
-					result = result + tmp[i] + " )";
-				} else {
-					result = result + tmp[i];
-				}
-			}
-			return result;
 		}
-		return str;
+		result = result + " " + tmp[tmp.length-1];
+		while(parenscnt > 0){
+			result = result + " )";
+			parenscnt--;
+		}
+		return result;
 	}
 	
 	//also swaps otherwise to else
@@ -256,11 +263,7 @@ public class TreeParser {
 		for(int i=a; i<b; i++){
 			result = result + delim + words[i];
 		}
-		if(b - a > 0){
-			return result.substring(delim.length());
-		} else {
-			return "";
-		}
+		return result.substring(delim.length());
 	}
 	
 	public static int arrayfind(String[] words, String key){
@@ -286,10 +289,10 @@ public class TreeParser {
 	public static String recbracket(String str){
 		String[] tmp = str.split("\\s+");
 		String[] comparator = new String[]{"greater", "equal", "less"};
-		String[] unary_ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement", "remainder","integer","boolean","double","string"};
-		String[] short_ops = new String[]{"times", "plus", "minus", "modulo"};
-		String[] long_ops = new String[]{"multiply", "add", "subtract", "divide"};
-		String[] passive_ops = new String[]{"multipled", "divided", "added", "subtracted"};
+		String[] unary_ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement","integer","boolean","double","string","declare"};
+		String[] short_ops = new String[]{"times", "plus", "minus", "modulo", "mod"};
+		String[] long_ops = new String[]{"remainder","multiply", "add", "subtract", "divide"};
+		String[] passive_ops = new String[]{"multiplied", "divided", "added", "subtracted"};
 		int comparator_i = lists_search(tmp, comparator);
 		int ops_long_i = lists_search(tmp, long_ops);
 		int ops_short_i = lists_search(tmp, short_ops);
@@ -310,12 +313,12 @@ public class TreeParser {
 		} else {
 			if(unary_ops_i > -1){
 				return unary_ops(str);
-			} else if (passive_ops_i > -1){
-				return passive_ops(str);
 			} else if(((ops_short_i < ops_long_i) || ops_long_i == -1) && ops_short_i > -1){
 				return ops_short(str);
 			} else if(ops_long_i > -1) {
 				return ops_long(str);
+			} else if (passive_ops_i > -1){
+				return passive_ops(str);
 			}
 		}
 		return "[" + str + "]";
@@ -385,7 +388,7 @@ public class TreeParser {
 	
 	public static String ops_short(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"times", "plus", "minus", "modulo"};
+		String[] ops = new String[]{"times", "plus", "minus", "modulo", "mod"};
 		int op_i = lists_search(tmp, ops);
 		if(op_i > -1 && tmp.length > op_i + 1){
 			return "[" + recbracket(recombine(tmp," ",0,op_i)) + " [["+ tmp[op_i] + "] " + recbracket(recombine(tmp," ", op_i+1, tmp.length)) + "]]";
@@ -398,11 +401,13 @@ public class TreeParser {
 	
 	public static String ops_long(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"multiply", "add", "subtract", "divide"};
-		String[] cmpwords = new String[]{"by", "to", "from","of"};
+		String[] ops = new String[]{"remainder","multiply", "add", "subtract", "divide"};
+		String[] cmpwords = new String[]{"of","by", "to", "from"};
 		int op_i = lists_search(tmp, ops);
 		int word_i = lists_search(tmp, cmpwords);
-		if(op_i == 0 && word_i > -1 & tmp.length > word_i + 1){
+		if(tmp[op_i].equals("remainder") && tmp[word_i].equals("of") && op_i == 0 && word_i == 1){
+			return "[[remainder] [[of] " + recbracket(recombine(tmp," ",2,tmp.length)) + "]]";
+		} else if(op_i == 0 && word_i > -1 & tmp.length > word_i + 1){
 			return "[[[" + tmp[0] + "] " + recbracket(recombine(tmp," ",1,word_i)) + "] [[" + tmp[word_i] + "] " + recbracket(recombine(tmp," ",word_i+1, tmp.length)) + "]]";
 		} else if (op_i == 0){
 			return "[" + tmp[0] + "]";
@@ -413,8 +418,8 @@ public class TreeParser {
 	
 	public static String passive_ops(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"multipled", "divided", "added", "subtracted"};
-		String[] cmpwords = new String[]{"by", "to", "from","of"};
+		String[] ops = new String[]{"multiplied", "divided", "added", "subtracted"};
+		String[] cmpwords = new String[]{"by", "to", "from"};
 		int op_i = lists_search(tmp, ops);
 		int word_i = lists_search(tmp, cmpwords);
 		if(op_i > -1 && word_i > -1 && op_i + 1 == word_i){
@@ -426,7 +431,7 @@ public class TreeParser {
 	
 	public static String unary_ops(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement","remainder","integer","boolean","double","string"};
+		String[] ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement","declare","integer","boolean","double","string"};
 		int op_i = lists_search(tmp, ops);
 		if(op_i == 0 && tmp.length > op_i + 1){
 			return "[[" + tmp[0] + "] " + recbracket(recombine(tmp, " ", 1, tmp.length)) + "]";
