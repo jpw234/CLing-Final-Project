@@ -9,6 +9,8 @@ public class TreeParser {
 	public static int currentnumStrings=0;
 	public static Map<String,Integer> integers= new HashMap<String,Integer>(200);
 	public static int currentnumIntegers=0;
+	public static Map<String,Double> doubles= new HashMap<String,Double>(200);
+	public static int currentnumDoubles=0;
 	
 	public static void main(String args[]){
 		Scanner input = new Scanner(System.in);
@@ -33,11 +35,8 @@ public class TreeParser {
 						totaloutput.add(exp);
 					}
 				}
-				//store doubles
-				//problem---how to then store integers---mayb ont replace right away but
-				//note the index of the double  and then after storing integers insert the doubles as well?
-				//store integers
-				storeIntegers(totaloutput);
+				//stores both doubles and integers
+				storeNumbers(totaloutput);
 				//store strings
 				storeStrings(totaloutput);
 				System.out.println(totaloutput);
@@ -45,12 +44,10 @@ public class TreeParser {
 			next = input.nextLine();
 		}
 		input.close();
-		//declare ex: "declare integer x"
-		//now left to 0.figure out the issue with doubles
-		//1.tag words w types and
-		//2.send all sentences (excluding brackets) from array to lambda calculator, 
-		//3.get output, 
-		//4.put back all the stored values
+		//+integer, double as well as declare ex: "declare integer x"
+		//also put in the method that breaks string into sentences
+		//now left to tag words w types and send all sentences (excluding brackets) from array/or is it string
+		//to lambda calculator
 	}
 	
 	private static void storeStrings(ArrayList<String> a){
@@ -90,13 +87,14 @@ public class TreeParser {
 	}
 	
 	
-	private static void storeIntegers(ArrayList<String> a){
+	private static void storeNumbers(ArrayList<String> a){
 		for (int i=0;i<a.size();i++){
 			//String thisOne=a.get(i);//original string
 			//replace any string with s1/2/etc
 			for (int c=0;c<a.get(i).length();c++){
 				//System.out.println(c);
 			    if (Character.isDigit(a.get(i).charAt(c))){
+			    	boolean doublenumber=false;
 			    	int start=c;
 			    	//System.out.println(start);
 			    	String s="";
@@ -106,15 +104,33 @@ public class TreeParser {
 			    		//System.out.println("aqui");
 			    		if(Character.isDigit(a.get(i).charAt(z)))
 			    			s+=a.get(i).charAt(z);
+			    		else if(a.get(i).charAt(z)=='.'){
+			    			doublenumber=true;
+			    			s+=a.get(i).charAt(z);
+			    		}
 			    		else {end=z;break;}
 			    	}
 			    	//to not confuse integers with variables V1-V200 or other integers already replaced or strings already replaced
-			    	if(a.get(i).charAt(c-1)!='V' && a.get(i).charAt(c-1)!='N'&& a.get(i).charAt(c-1)!='S'){
-			    	currentnumIntegers++;
-			    	String tag="N";
-					tag+=currentnumIntegers;
-			        //puts the string and its tag into the map
-			    	integers.put(tag,Integer.parseInt(s));
+			    	//or double already replaced
+			    	char ch=a.get(i).charAt(c-1);
+			    	if(ch!='V' && ch!='N'&& ch!='S' && ch!='D' ){
+			    	String tag="";
+			    	if(!doublenumber){
+			    		currentnumIntegers++;
+			    	   tag="N";
+					   tag+=currentnumIntegers;
+			           //puts the string and its tag into the map
+			    	   integers.put(tag,Integer.parseInt(s));
+			    	  }
+			    	else if(doublenumber){
+			    		currentnumDoubles++;
+			    		tag="D";
+						tag+=currentnumDoubles;
+						Scanner sc= new Scanner(s);
+				        //puts the string and its tag into the map
+				    	doubles.put(tag,sc.nextDouble());
+				    	sc.close();
+			    	  }
 			    	//replaces the string with the tag in the original string
 			    	//System.out.println("start"+start);
 			    	String switchesTo=a.get(i).substring(0,start)+tag+a.get(i).substring(end,a.get(i).length());
