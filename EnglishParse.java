@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 import java.util.Map;
 import java.util.HashMap;
+
+//USE TREEPARSE INSTEAD
+
 public class EnglishParse {
 	//input string //in the future may change to input from a file
 	//break into sentences  -may also need to break into words
