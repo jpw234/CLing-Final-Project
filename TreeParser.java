@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -39,6 +40,8 @@ public class TreeParser {
 				storeNumbers(totaloutput);
 				//store strings
 				storeStrings(totaloutput);
+				//tag words with types
+				addTags(totaloutput);
 				System.out.println(totaloutput);
 			}
 			next = input.nextLine();
@@ -49,6 +52,208 @@ public class TreeParser {
 		//now left to tag words w types and send all sentences (excluding brackets) from array/or is it string
 		//to lambda calculator
 	}
+	private static String before(String s){
+		//System.out.println("befoe input"+s);
+		int closed=0;
+		int countdownIndex=0;
+		int i=s.length()-1;
+		//gets an xtra char but thts alright i hope
+		for (;i>=0&&countdownIndex==0;i--){
+			if(s.charAt(i)==']'){
+				closed++;
+				countdownIndex=i;
+			}
+		}
+		int x=countdownIndex-1;
+		for(;x>=0&&closed>0;x--){
+			if(s.charAt(x)==']'){
+				closed++;
+			}
+			if(s.charAt(x)=='['){
+				closed--;
+			}
+		}
+		
+		//System.out.println("before["+s.substring(x+1,s.length())+"]");
+		return s.substring(x+1,s.length());
+	}
+	private static String after(String s, boolean twotimes){
+		//System.out.println("after input"+s);
+		int countdownIndex=0;
+		int open=0;
+		int i=0;
+		for (;i<s.length()&&countdownIndex==0;i++){
+			if(s.charAt(i)=='['){
+				open++;
+				countdownIndex=i;
+			}
+		}
+		int x=countdownIndex+1;
+		for(;x<s.length()&&open>0;x++){
+			if(s.charAt(x)=='['){
+				open++;
+			}
+			if (s.charAt(x)==']'){
+				open--;
+			}
+			//System.out.println("hey1 "+x+ "open is"+open);
+		}
+		//System.out.println("hey"+ x);
+		//System.out.println("after output "+s.substring(0,x));
+		if(!twotimes)
+		return s.substring(0,x);
+		else
+			return after(s.substring(x,s.length()),false);
+	}
+	private static String typeOfString(String s){
+		if(s.indexOf("multiply")!=-1 || 
+				s.indexOf("times")!=-1 ||
+				s.indexOf("plus")!=-1 ||
+				s.indexOf("minus")!=-1 || 
+				s.indexOf("divide")!=-1 ||
+				s.indexOf("divided")!=-1 ||
+				s.indexOf("add")!=-1 ||
+				s.indexOf("subtract")!=-1 ||
+				s.indexOf("modulo")!=-1 ||
+				s.indexOf("negative")!=-1 ||
+				s.indexOf("twice")!=-1){
+			return "t";
+		}
+		return "e";
+	}
+	private static boolean wordTypeAfter(String s){
+		boolean b=false;
+		switch(s){
+		//noooo, set is 2 after that is the after after the first after case "set": b=true; break;
+		//later test and add case "twice"
+		//also test and add later case "negative"
+		case "by":  b=true; break;
+		case "to": b=true; break;
+		case "from": b=true; break;
+		case "than": b=true; break;
+		case "of": b=true; break;
+		case "print": b=true; break;
+		case "return": b=true; break;
+		default:b=false;break;
+		}
+		return b;
+	}
+	private static boolean wordTypeAfterAfter(String s){
+		boolean b=false;
+		switch(s){
+		case "multiply": b=true; break;
+		//later test and add case "twice"
+		//also test and add later case "negative"
+		case "divide":  b=true; break;
+		case "add": b=true; break;
+		case "subtract": b=true; break;
+		default:b=false;break;
+		}
+		return b;
+	}
+	private static boolean wordTypeBeforeAfter(String s){
+		boolean b=false;
+		switch(s){
+		case "times": b=true; break;
+		//later test and add case "twice"
+		//also test and add later case "negative"
+		case "plus":  b=true; break;
+		case "minus": b=true; break;
+		case "greater": b=true; break;
+		case "less": b=true; break;
+		case "equal": b=true; break;
+		case "divided": b=true; break;
+		default:b=false;break;
+		}
+		return b;
+	}
+	//to get string after word to be tagged, use .sublist(from,to) for the input from addTags
+	private static String arrListToString(List<String> list){
+		String str="";
+		for(int i=0;i<list.size();i++){
+			//System.out.println("adding"+list.get(i));
+			str=str.concat(list.get(i));
+		}
+		//System.out.println("the string from array is "+str);
+		return str;
+	}
+	private static void addTags(ArrayList<String> a){
+		for(int i=0;i<a.size();i++){
+			String thisOne=a.get(i);
+			//for each taggable word, check what is in before/after to determine type
+			//make array of  and booleans, if bracket or whitespace, put it in
+			//if encounter characters, put the whole sequence in and true
+			//then in the array, all the words to be tagged are the ones that are characters
+			ArrayList<String> untagged=new ArrayList<String>();
+			for (int c=0;c<thisOne.length();c++){
+				if(thisOne.charAt(c)=='['||thisOne.charAt(c)==']' ||thisOne.charAt(c)==' '){
+					untagged.add(""+thisOne.charAt(c));
+				}
+				else{
+					int j=c;
+					while(thisOne.charAt(j)!='['&& thisOne.charAt(j)!=']' && thisOne.charAt(j)!=' '){
+						j++;
+					}
+					untagged.add(thisOne.substring(c,j));
+					c=j-1;
+					}
+				}
+			//now that we have populated untagged...
+			//System.out.println("hi"+untagged.get(4));
+			for(int w=0;w<untagged.size();w++){
+				String toTag=untagged.get(w);
+				//System.out.println("totag  "+toTag);
+				if(!toTag.equals("[")&&!toTag.equals("]")&&!toTag.equals(" ")){
+					//which of the 3 sets is it from
+					if(toTag.equals("set")){
+						String typeafter2=typeOfString(after(arrListToString(untagged. subList(w+1,untagged.size())),true));
+						if(!typeafter2.equals("e")){
+							untagged.set(w,toTag.concat("-").concat(typeafter2));
+						}
+					}
+					else
+					if(wordTypeAfter(untagged.get(w))){
+						String type=typeOfString(after(arrListToString(untagged. subList(w+1,untagged.size())),false));
+						if(!type.equals("e")){
+							untagged.set(w,toTag.concat("-").concat(type));
+						}
+					}
+					else if(wordTypeAfterAfter(untagged.get(w))){
+						String typeafter1=typeOfString(after(arrListToString(untagged. subList(w+1,untagged.size())),false));
+						String typeafter2=typeOfString(after(arrListToString(untagged. subList(w+1,untagged.size())),true));
+						String totaltype=typeafter1+typeafter2;
+						if(!totaltype.equals("ee")){
+							untagged.set(w,toTag.concat("-").concat(totaltype));
+						}
+						//System.out.println("Not yet");
+					}
+					else if(wordTypeBeforeAfter(untagged.get(w))){
+						String typeafter=typeOfString(after(arrListToString(untagged. subList(w+1,untagged.size())),false));
+						String typebefore=typeOfString(before(arrListToString(untagged. subList(0,w))));
+						//reversed because i thought it would take left first, but the parser now it takes right first(that is the after comes first)
+						String totaltype;
+						if(!toTag.equals("divided")){
+						totaltype=typeafter+typebefore;
+						}
+						else{
+						 totaltype=typebefore+typeafter;
+						}
+						if(!totaltype.equals("ee")){
+							untagged.set(w,toTag.concat("-").concat(totaltype));
+						}
+						//System.out.println("not yet");
+						
+					}
+					//based on the set, call before/after to figure type
+					//System.out.println(untagged.get(w));
+				}
+			}
+			//now that untagged has been tagged
+			a.set(i,arrListToString(untagged));
+			}
+			
+		}
+	
 	
 	private static void storeStrings(ArrayList<String> a){
 		for (int i=0;i<a.size();i++){
