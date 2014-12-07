@@ -310,6 +310,8 @@ public class TreeParser {
 			return point(str);
 		} else if (comparator_i > -1){
 			return compare_than(str);
+		} else if (tmp[0].equals("a") || tmp[0].equals("an")){
+			 return a_an(str);
 		} else {
 			if(unary_ops_i > -1){
 				return unary_ops(str);
@@ -322,6 +324,15 @@ public class TreeParser {
 			}
 		}
 		return "[" + str + "]";
+	}
+	
+	public static String a_an(String str){
+		String[] tmp = str.split("\\s+");
+		if(tmp[0].equals("a") || tmp[0].equals("an")){
+			return "[[" + tmp[0] + "] [" + recbracket(recombine(tmp," ", 1, tmp.length)) + "]]";
+		}
+		System.out.println("You broke an invariant, needs start with a or an");
+		return "";	
 	}
 	
 	public static String if_only(String str){
