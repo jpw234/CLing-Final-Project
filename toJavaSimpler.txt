@@ -892,7 +892,8 @@ define true: True
 define false: False
 
 # negation for bools x not equal to...
-define not: LP[not(P)]
+#doesnt work define not: LP[not(P)]
+define not: LPLy.~Ex[P(y)]
 
 #declaring
 define declare: Lp.p
