@@ -1,0 +1,48 @@
+exercise tree
+title e1
+directions set x to N2
+
+[[.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set][.NNP.p.- x]][.PP.nvd.to.np [.TO to][.NP.nvd.base.-.-.-.- [.CD N2]]]]]
+
+title e2
+directions set y to twice x
+[[.NP.nvd.-.-.-.-.- [.NP.nvd.base.-.-.p.- [.NNP.-.- set-t][.NNP.p.- b]][.PP.nvd.to.np [.TO to-t][.NP.nvd.base.-.-.-.- [.NNP.-.- twice][.NNP.-.- x]]]]]
+
+title e3
+directions multiply x by N2
+
+#[result[ [[ multiply][[ [ x]] [[ by-r][ [ two]]]]]]]
+[[[ [[ multiply][ [ x]] ]][[ by][ [ N2]]]]]
+
+title e4
+directions subtract N3 form x
+
+[[[[[subtract] [[N3]]]  [[from]  [[x]]]]]]
+
+
+title e5
+directions x is greater than N3
+
+[[[[x]][[ is] [[[greater][[than] [N3]]]]]]]
+
+title e6
+directions set x to true
+
+[ [[[set][x]][ [to][[true]]]]]
+
+title e7
+directions if x is equal to N3 then set x to N1
+
+#doesnt work [result[[if][[[x]][[ is][[equal][[to][[ three]]]][[ then][[set][[[x]][[[to-r][[ one]]]]]]]]]]]
+
+# complicated braket deletion and insertion
+[[[[if][[[x]][[ is][[equal][[to][[ N3]]]]]]][[ then][[[set][[x]]][[[to][[ N1]]]]]]]]
+
+title e8
+directions x divided by x
+
+[[[[ x] [divided]] [[by] [[ x]]]]]
+
+
+title e10
+[[[[set-t][x]][[to-t][[N46][[plus][N47]]]]]]
