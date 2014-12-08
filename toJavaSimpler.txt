@@ -57,14 +57,8 @@ define modulo: LxLy[mod(x,y)]
 #add or subtract 1 to/from integers only
 define increment: Lx[add(N1,x)]
 define decrement: Lx[subtract(x,N1)]
-#if want to do operators on negative numbers then need
-#the complex multiple operator expressions below
-#for integers
-define negative: Lx[negative(x)]
-#for doubles
-define negative-t: Lp[negative(p)]
 
-#assignment like x=12*31 or x=point(1,5)
+#assignment like x=12*31 or
 define set-t:LxLp[assign(x,p)]
 
 #complex multiple operator expressions...probably will not do
@@ -75,7 +69,7 @@ define set-t:LxLp[assign(x,p)]
 #so keep these definitions but still don't want to
 #allow more than 1 operation at a time
 
-#(int operation double)
+#(int operation complex)
 define multiply-et: LxLp[multiply(x,p)]
 define times-et: LxLp[multiply(x,p)] 
 define divide-et:LxLp[divide(x,p)]
@@ -92,7 +86,7 @@ define greater-et:LxLp[greater(p,x)]
 define less-et:LxLp [less(p,x)]
 define equal-et:LxLp[equal(p,x)]
 
-#also LpLx  (double operation int)
+#also LpLx  (complex operation int)
 define multiply-te: LpLx[multiply(p,x)]
 define times-te: LpLx[multiply(p,x)] 
 define divide-te:LpLx[divide(p,x)]
@@ -108,7 +102,7 @@ define greater-te:LpLx[greater(x,p)]
 define less-te:LpLx[less(x,p)]
 define equal-te:LpLx[equal(x,p)]
 
-#now LpLq  (double operation double)
+#now LpLq  (complex operation complex)
 define multiply-tt: LpLq[multiply(p,q)]
 define times-tt: LpLq[multiply(p,q)] 
 define divide-tt:LpLq[divide(p,q)]
