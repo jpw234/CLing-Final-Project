@@ -68,6 +68,7 @@ public class Token {
 	public static final int RPAREN = 62;
 	public static final int LBRACKET = 63;
 	public static final int RBRACKET = 64;
+	public static final int COMMA = 65;
 	
 	//Error code
 	public static final int ERROR = 500;

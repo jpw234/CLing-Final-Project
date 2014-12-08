@@ -97,6 +97,8 @@ public class Tokenizer implements Iterator<Token> {
 			setNextToken(Token.LPAREN);
 		else if (c == ')')
 			setNextToken(Token.RPAREN);
+		else if (c == ',')
+			setNextToken(Token.COMMA);
 		//TODO: Add handlers for or, and, and implies (the unique characters for them)
 		else if (Character.isJavaIdentifierStart(c))
 			lexIdentifier();

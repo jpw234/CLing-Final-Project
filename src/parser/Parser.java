@@ -27,23 +27,23 @@ public class Parser {
 		Token comm = tk.next();
 		switch(comm.getType()){
 		case Token.ASSIGN: {
-			tk.consume('(');
+			tk.next(); //LParen
 			Variable var = parseVariable();
-			tk.consume(',');
+			tk.next(); //Comma
 			Value val = parseValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			return new Assignment(var, val);
 		}
 			
 		case Token.PRINT: {
-			tk.consume('(');
+			tk.next(); //This should be an LParen
 			Value val = parseValue();
-			tk.consume(')');
+			tk.next(); //This should be an RParen
 			return new PrintCommand(val);
 		}
 			
 		case Token.DECLARE: {
-			tk.consume('(');
+			tk.next(); //LParen
 			Token varType = tk.next();
 			VariableType t;
 			switch(varType.getType()) {
@@ -59,27 +59,27 @@ public class Parser {
 			default:
 				return null;
 			}
-			tk.consume(',');
+			tk.next(); //Comma
 			Variable var = parseVariable();
-			tk.consume(')');
+			tk.next(); //RParen
 			return new Declaration(t, var);
 		}
 			
 		case Token.IF: {
-			tk.consume('(');
+			tk.next(); //LParen
 			BValue b = parseBValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			//TODO: Parsing the arrow here
 			Program ifBranch = parseProgram();
 			//TODO: Figure out how to parse the else branch
-			tk.consume(')');
+			tk.next(); //RParen
 			return new IfBlock(b, ifBranch);
 		}
 			
 		case Token.WHILE: {
-			tk.consume('(');
+			tk.next(); //LParen
 			BValue b = parseBValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			//TODO: Parsing the arrow here
 			Program loop = parseProgram();
 			return new WhileBlock(b, loop);
@@ -130,36 +130,38 @@ public class Parser {
 		case Token.FALSE:
 			ret = new Bool(false);
 			break;
+		case Token.VAR: 
+			ret = new Variable(((VarToken) next).getName());
 		case Token.NOT:
-			tk.consume('(');
+			tk.next(); //LParen
 			BValue operand = parseBValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			ret = new BooleanOp(BooleanOpType.NOT, operand);
 			break;
 		case Token.LESS: {
-			tk.consume('(');
+			tk.next(); //LParen
 			NValue n1 = parseNValue();
-			tk.consume(',');
+			tk.next(); //Comma
 			NValue n2 = parseNValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			ret = new ArithmeticRel(ArithmeticRelType.LESS, n1, n2);
 			break;
 		}
 		case Token.EQUAL: {
-			tk.consume('(');
+			tk.next(); //LParen
 			NValue n1 = parseNValue();
-			tk.consume(',');
+			tk.next(); //Comma
 			NValue n2 = parseNValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			ret = new ArithmeticRel(ArithmeticRelType.EQUAL, n1, n2);
 			break;
 		}
 		case Token.GREATER: {
-			tk.consume('(');
+			tk.next(); //LParen
 			NValue n1 = parseNValue();
-			tk.consume(',');
+			tk.next(); //Comma
 			NValue n2 = parseNValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			ret = new ArithmeticRel(ArithmeticRelType.GREATER, n1, n2);
 			break;
 		}
@@ -188,44 +190,48 @@ public class Parser {
 				return new ast.Number((int) val.getValue(), true);
 			}
 			else return new ast.Number(val.getValue(), true);
+		case Token.VAR: {
+			VarToken var = (VarToken) next;
+			return new Variable(var.getName());
+		}
 		case Token.ADD: {
-			tk.consume('(');
+			tk.next(); //LParen
 			NValue n1 = parseNValue();
-			tk.consume(',');
+			tk.next(); //Comma
 			NValue n2 = parseNValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			return new ArithmeticOp(n1, n2, ArithmeticOpType.PLUS);
 		}
 		case Token.SUBTRACT: {
-			tk.consume('(');
+			tk.next(); //LParen
 			NValue n1 = parseNValue();
-			tk.consume(',');
+			tk.next(); //Comma
 			NValue n2 = parseNValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			return new ArithmeticOp(n1, n2, ArithmeticOpType.MINUS);
 		}
 		case Token.MULTIPLY: {
-			tk.consume('(');
+			tk.next(); //LParen
 			NValue n1 = parseNValue();
-			tk.consume(',');
+			tk.next(); //Comma
 			NValue n2 = parseNValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			return new ArithmeticOp(n1, n2, ArithmeticOpType.TIMES);
 		}
 		case Token.DIVIDE: {
-			tk.consume('(');
+			tk.next(); //LParen
 			NValue n1 = parseNValue();
-			tk.consume(',');
+			tk.next(); //Comma
 			NValue n2 = parseNValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			return new ArithmeticOp(n1, n2, ArithmeticOpType.DIVIDE);
 		}
 		case Token.MOD: {
-			tk.consume('(');
+			tk.next(); //LParen
 			NValue n1 = parseNValue();
-			tk.consume(',');
+			tk.next(); //Comma
 			NValue n2 = parseNValue();
-			tk.consume(')');
+			tk.next(); //RParen
 			return new ArithmeticOp(n1, n2, ArithmeticOpType.MOD);
 		}
 		default:

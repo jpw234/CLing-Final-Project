@@ -1,0 +1,4 @@
+assign(y, N3)
+assign(x, N4)
+assign(z, subtract(x, y))
+print(z)
