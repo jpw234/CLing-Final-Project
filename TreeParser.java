@@ -75,7 +75,12 @@ public class TreeParser {
 		}
 		
 		//System.out.println("before["+s.substring(x+1,s.length())+"]");
-		return s.substring(x+1,s.length());
+		String answer=s.substring(x+1,s.length());
+		System.out.println(answer);
+		if(answer.indexOf("not")==-1 && answer.indexOf("is")==-1)
+		return answer;
+		else
+			return before(s.substring(0,x+1));
 	}
 	private static String after(String s, boolean twotimes){
 		//System.out.println("after input"+s);
