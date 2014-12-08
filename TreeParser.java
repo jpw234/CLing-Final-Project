@@ -192,12 +192,13 @@ public class TreeParser {
 			//then in the array, all the words to be tagged are the ones that are characters
 			ArrayList<String> untagged=new ArrayList<String>();
 			for (int c=0;c<thisOne.length();c++){
-				if(thisOne.charAt(c)=='['||thisOne.charAt(c)==']' ||thisOne.charAt(c)==' '){
+				if(thisOne.charAt(c)=='['||thisOne.charAt(c)==']' ||thisOne.charAt(c)==' '||thisOne.charAt(c)=='('||thisOne.charAt(c)==')'){
 					untagged.add(""+thisOne.charAt(c));
 				}
 				else{
 					int j=c;
-					while(thisOne.charAt(j)!='['&& thisOne.charAt(j)!=']' && thisOne.charAt(j)!=' '){
+					while(thisOne.charAt(j)!='['&& thisOne.charAt(j)!=']' && thisOne.charAt(j)!=' '
+							&& thisOne.charAt(j)!='(' && thisOne.charAt(j)!=')'){
 						j++;
 					}
 					untagged.add(thisOne.substring(c,j));
