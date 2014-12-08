@@ -509,7 +509,7 @@ public class TreeParser {
 	
 	public static String recbracket(String str){
 		String[] tmp = str.split("\\s+");
-		String[] comparator = new String[]{"greater", "equal", "less"};
+		String[] comparator = new String[]{"greater", "equal", "less", "more"};
 		String[] unary_ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement","integer","boolean","double","string","declare"};
 		String[] short_ops = new String[]{"times", "plus", "minus", "modulo", "mod"};
 		String[] long_ops = new String[]{"remainder","multiply", "add", "subtract", "divide"};
@@ -525,11 +525,11 @@ public class TreeParser {
 			return while_block(str);
 		} else if (tmp[0].equals("set")){
 			return setvar(str);
-		} else if (comparator_i > -1){
-			return compare_than(str);
 		} else if (arrayfind(tmp, "and") > -1 || arrayfind(tmp, "or") > -1){ 
 			return and_or(str);
-		} else if (unary_ops_i > -1){
+		} else if (comparator_i > -1){
+			return compare_than(str);
+		}  else if (unary_ops_i > -1){
 			return unary_ops(str);
 		} else if (tmp[0].equals("a") || tmp[0].equals("an")){
 			 return a_an(str);
@@ -611,10 +611,12 @@ public class TreeParser {
 		String[] tmp = str.split("\\s+");
 		int is_i = arrayfind(tmp, "is");
 		if(tmp.length > is_i + 2 && is_i > -1){
-			if((tmp[is_i+1].equals("greater") || tmp[is_i+1].equals("less") || tmp[is_i+1].equals("equal")) && (tmp[is_i+2].equals("than") || tmp[is_i+2].equals("to"))){
+			if((tmp[is_i+1].equals("greater") || tmp[is_i+1].equals("less") || tmp[is_i+1].equals("equal") || tmp[is_i+1].equals("more")) && (tmp[is_i+2].equals("than") || tmp[is_i+2].equals("to"))){
 				return "[[" + recbracket(recombine(tmp," ",0,is_i)) + "] [[is] [[" + tmp[is_i+1] + "] [[" + tmp[is_i+2] + "] " + recbracket(recombine(tmp," ",is_i+3,tmp.length)) + "]]]]";
 			} else if (tmp[is_i+1].equals("not") && tmp.length > is_i + 3){
-				return "[[" + recbracket(recombine(tmp," ",0,is_i)) + "] [[is] [[" + tmp[is_i+1] + "] [[" + tmp[is_i+2] + "] " + recbracket(recombine(tmp," ",is_i+3,tmp.length)) + "]]]]";
+				if((tmp[is_i+2].equals("greater") || tmp[is_i+2].equals("less") || tmp[is_i+2].equals("equal") || tmp[is_i+2].equals("more")) && (tmp[is_i+3].equals("than") || tmp[is_i+3].equals("to"))){
+					return "[[" + recbracket(recombine(tmp," ",0,is_i)) + "] [[is] [[not] [[" + tmp[is_i+2] + "] [[" + tmp[is_i+3] + "] " + recbracket(recombine(tmp," ",is_i+4,tmp.length)) + "]]]]]";					
+				}
 			}
 		} 
 		System.out.println("syntax error in comparative functions");
