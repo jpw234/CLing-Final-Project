@@ -120,7 +120,7 @@ public class TreeParser {
 				s.indexOf("add")!=-1 ||
 				s.indexOf("subtract")!=-1 ||
 				s.indexOf("modulo")!=-1 ||
-				s.indexOf("negative")!=-1 ||
+				//s.indexOf("negative")!=-1 ||
 				s.indexOf("twice")!=-1){
 			return "t";
 		}
@@ -308,6 +308,13 @@ public class TreeParser {
 			    	int start=c;
 			    	//System.out.println(start);
 			    	String s="";
+			    	if(c-1>=0)
+			    	if(a.get(i).charAt(c-1)=='-'){
+			    		//System.out.println("negative");
+			    		//System.out.println(Integer.parseInt("-2"));
+			    		s+=a.get(i).charAt(c-1);
+			    		start=c-1;
+			    	}
 			    	s+=a.get(i).charAt(c);
 			    	int end=c;
 			    	for(int z=c+1;z<a.get(i).length();z++){
