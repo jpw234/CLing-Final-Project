@@ -76,11 +76,12 @@ public class TreeParser {
 		
 		//System.out.println("before["+s.substring(x+1,s.length())+"]");
 		String answer=s.substring(x+1,s.length());
-		System.out.println(answer);
+		//System.out.println(answer);
 		if(answer.indexOf("not")==-1 && answer.indexOf("is")==-1)
 		return answer;
 		else
 			return before(s.substring(0,x+1));
+		
 	}
 	private static String after(String s, boolean twotimes){
 		//System.out.println("after input"+s);
@@ -120,7 +121,7 @@ public class TreeParser {
 				s.indexOf("add")!=-1 ||
 				s.indexOf("subtract")!=-1 ||
 				s.indexOf("modulo")!=-1 ||
-				//s.indexOf("negative")!=-1 ||
+				s.indexOf("negative")!=-1 ||
 				s.indexOf("twice")!=-1){
 			return "t";
 		}
@@ -329,7 +330,7 @@ public class TreeParser {
 			    	}
 			    	//to not confuse integers with variables V1-V200 or other integers already replaced or strings already replaced
 			    	//or double already replaced
-			    	char ch=a.get(i).charAt(c-1);
+			    	char ch=a.get(i).charAt(start-1);
 			    	if(ch!='V' && ch!='N'&& ch!='S' && ch!='D' ){
 			    	String tag="";
 			    	if(!doublenumber){
@@ -345,7 +346,9 @@ public class TreeParser {
 						tag+=currentnumDoubles;
 						Scanner sc= new Scanner(s);
 				        //puts the string and its tag into the map
-				    	doubles.put(tag,sc.nextDouble());
+						double d=sc.nextDouble();
+						//System.out.println(d);
+				    	doubles.put(tag,d);//sc.nextDouble());
 				    	sc.close();
 			    	  }
 			    	//replaces the string with the tag in the original string
@@ -673,4 +676,3 @@ public class TreeParser {
 		return "";
 	}
 }
-
