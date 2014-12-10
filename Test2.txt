@@ -1,0 +1,11 @@
+assign(x, 4)
+assign(y, 5)
+assign(z, 6)
+assign(j, less(x, y))
+print(j)
+
+
+If x is greater than y, (set x to 5, set y to 6)
+
+if(greater(x, y))
+___ starting a block ___

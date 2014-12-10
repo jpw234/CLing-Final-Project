@@ -905,5 +905,3 @@ define return:Lx[return(x)]
 define return-t:Lp[return(p)]
 
 exercise tree
-
-

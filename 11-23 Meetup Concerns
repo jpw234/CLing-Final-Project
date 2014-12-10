@@ -1,0 +1,12 @@
+Stuff to figure out:
+
+How to call bitpar/lambda calculator/etc. from a main program
+How to represent if- and while-blocks with multiple commands (how for user to tell when a block is finished)
+A tool to convert from bitpar output to lambda calculator (Jane and Patrick are working on this)
+Encoding Strings (in the lambda calculator)
+	Possibility: pass on actual String values to Parser separately, give to Lambda calculator as S1, S2, etc. - maybe for numbers too?
+	Can also preprocess before going into bitpar similarly
+	
+Matthew is working on type inference - he'll email Jared if needs anything else from the node structure to do this
+
+Matthew after type inference is going to move on to our broad handler.

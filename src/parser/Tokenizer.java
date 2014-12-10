@@ -99,7 +99,6 @@ public class Tokenizer implements Iterator<Token> {
 			setNextToken(Token.RPAREN);
 		else if (c == ',')
 			setNextToken(Token.COMMA);
-		//TODO: Add handlers for or, and, and implies (the unique characters for them)
 		else if (c == '∧')
 			setNextToken(Token.AND);
 		else if (c == '∨')

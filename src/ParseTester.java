@@ -7,7 +7,9 @@ public class ParseTester {
 	public static void main(String[] args) {
 		
 		try {
-			BufferedReader data = new BufferedReader(new FileReader("Test1.txt"));
+			InputStream is = new FileInputStream("Test1.txt");
+			
+			BufferedReader data = new BufferedReader(new InputStreamReader(is, "utf8"));
 			
 			Parser parse = new Parser(data);
 			
@@ -19,6 +21,9 @@ public class ParseTester {
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("no file");
+		}
+		catch(UnsupportedEncodingException e) {
+			System.out.println("bad encoding");
 		}
 		
 	}

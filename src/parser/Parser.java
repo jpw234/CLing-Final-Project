@@ -3,6 +3,8 @@ package parser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import ast.*;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 /* STUFF TO ASK JANE ABOUT:
  * Representations of if and while
@@ -20,13 +22,39 @@ import ast.*;
  * 
  */
 
+
 public class Parser {
 	Tokenizer tk;
 	BufferedReader inp;
-
-	public Parser(BufferedReader r) {
+	
+	String[] lines;
+	HashMap<Integer, Integer> ints;
+	HashMap<Integer, Double> doubles;
+	HashMap<Integer, String> strings;
+	
+	LinkedList<Tuple<Program, Boolean>> blocks = new LinkedList<Tuple<Program, Boolean>>();
+	
+	
+	/*public Parser(BufferedReader r) {
 		inp = r;
 		tk = new Tokenizer(r);
+	}*/
+	
+	public static String convertFromUTF8(String s) {
+        String out = null;
+        try {
+            out = new String(s.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (java.io.UnsupportedEncodingException e) {
+            return null;
+        }
+        return out;
+    }
+
+	public Parser(String[] l, HashMap<Integer, Integer> i, HashMap<Integer, Double> d, HashMap<Integer, String> s) {
+		lines = l;
+		ints = i;
+		doubles = d;
+		strings = s;
 	}
 	
 	public Program parseProgram() {
