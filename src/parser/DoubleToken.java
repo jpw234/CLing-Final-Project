@@ -1,10 +1,10 @@
 package parser;
 
-public class VarToken extends Token {
+public class DoubleToken extends Token {
 	protected int index;
 	
-	public VarToken(int n) {
-		super(VAR);
+	public DoubleToken(int n) {
+		super(DOUB);
 		index = n;
 	}
 	

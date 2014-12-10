@@ -63,6 +63,8 @@ public class Token {
 	public static final int VAR = 52;
 	public static final int TRUE = 53;
 	public static final int FALSE = 54;
+	public static final int DOUB = 55;
+	public static final int STR = 56;
 	
 	//Syntactic markers between 61 and 70
 	public static final int LPAREN = 61;

@@ -182,23 +182,31 @@ public class Tokenizer implements Iterator<Token> {
 			setNextToken(Token.FALSE);
 		else if(id.equals("not"))
 			setNextToken(Token.NOT);
-		//#TODO: Add support for changed ints/variables/doubles/strings
-		else if(id.charAt(0) == 'N' && id.length() > 1) {//then it's a number
-			try {
-				String numString = id.substring(1);
-				int val = Integer.parseInt(numString);
-				curTok = new NumToken(val);
-				state = READY;
-				buf = new StringBuffer();
+		else if((id.charAt(0) == 'N' || id.charAt(0) == 'S' || 
+				 id.charAt(0) == 'D' || id.charAt(0) == 'V')	 && id.length() > 1) {//then it's a replaceable thing
+			String numString = id.substring(1);
+			int index = Integer.parseInt(numString);
+			switch(id.charAt(0)){
+			case 'N': {
+				curTok = new NumToken(index);
+				break;
 			}
-			catch (NumberFormatException e) {
-				unexpected();
+			case 'D': {
+				curTok = new DoubleToken(index);
+				break;
 			}
-		}
-		else if(id.length() == 1) {//then it's a variable
-			curTok = new VarToken(id);
+			case 'S': {
+				curTok = new StringToken(index);
+				break;
+			}
+			case 'V': {
+				curTok = new VarToken(index);
+				break;
+			}
+			}
 			state = READY;
 			buf = new StringBuffer();
+			
 		}
 		else
 			unexpected();

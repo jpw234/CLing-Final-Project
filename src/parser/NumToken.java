@@ -1,14 +1,14 @@
 package parser;
 
 public class NumToken extends Token {
-	protected double value;
+	protected int index;
 	
-	public NumToken(double val) {
+	public NumToken(int val) {
 		super(NUM);
-		value = val;
+		index = val;
 	}
 	
-	public double getValue() {
-		return value;
+	public int getIndex() {
+		return index;
 	}
 }

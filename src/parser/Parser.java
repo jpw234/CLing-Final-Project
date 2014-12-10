@@ -165,7 +165,11 @@ public class Parser {
 		switch(next.getType()) {
 		case Token.VAR: {
 			VarToken v = (VarToken) tk.next();
-			return new Variable(v.getName());
+			return new Variable("v" + Integer.toString(v.getIndex()));
+		}
+		case Token.STR: {
+			StringToken s = (StringToken) tk.next();
+			return new StringValue(strings.get(s.getIndex()));
 		}
 		case Token.NUM:
 		case Token.ADD:
@@ -200,7 +204,7 @@ public class Parser {
 			ret = new Bool(false);
 			break;
 		case Token.VAR: 
-			ret = new Variable(((VarToken) next).getName());
+			ret = new Variable("v" + Integer.toString(((VarToken) next).getIndex()));
 		case Token.NOT:
 			tk.next(); //LBracket
 			BValue operand = parseBValue();
@@ -253,15 +257,17 @@ public class Parser {
 		Token next = tk.next();
 		
 		switch(next.getType()) {
-		case Token.NUM:
+		case Token.NUM: {
 			NumToken val = (NumToken) next;
-			if(val.getValue() % 1 == 0) {//it's an integer
-				return new ast.Number((int) val.getValue(), true);
-			}
-			else return new ast.Number(val.getValue(), true);
+			return new ast.Number(ints.get(val.getIndex()), true);
+		}
+		case Token.DOUB: {
+			DoubleToken val = (DoubleToken) next;
+			return new ast.Number(doubles.get(val.getIndex()), false);
+		}
 		case Token.VAR: {
 			VarToken var = (VarToken) next;
-			return new Variable(var.getName());
+			return new Variable("v" + Integer.toString(var.getIndex()));
 		}
 		case Token.ADD: {
 			tk.next(); //LParen
@@ -310,6 +316,6 @@ public class Parser {
 	
 	public Variable parseVariable() {
 		VarToken v = (VarToken) tk.next();
-		return new Variable(v.getName());
+		return new Variable("v" + Integer.toString(v.getIndex()));
 	}
 }
