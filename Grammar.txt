@@ -6,8 +6,9 @@ Program = 		Command*
 
 Command = 		Assign(Variable, Value) | If(bValue, Program, (Program)) |
 				While(bValue, Program) | Print(Value) | Declare(Type, Variable)
+				Return(Value)
 
-Value = 		nValue | bValue			//More will be added as we add more types, in particular Strings
+Value = 		nValue | bValue	| String		//More will be added as we add more types, in particular Strings
 
 nValue = 		Variable | ArithmeticOp(AOpType, nValue, nValue) | int | double
 
