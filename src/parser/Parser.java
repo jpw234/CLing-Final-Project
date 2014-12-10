@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.BufferedReader;
+import java.io.StringReader;
 import java.io.IOException;
 import ast.*;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public class Parser {
 	HashMap<Integer, Double> doubles;
 	HashMap<Integer, String> strings;
 	
-	LinkedList<Tuple<Program, Boolean>> blocks = new LinkedList<Tuple<Program, Boolean>>();
+	LinkedList<Program> blocks = new LinkedList<Program>();
 	
 	
 	/*public Parser(BufferedReader r) {
@@ -60,8 +61,22 @@ public class Parser {
 	public Program parseProgram() {
 		Program out = new Program();
 		
-		while(tk.hasNext()) {
-			out.addCommand(parseCommand());
+		for(int a = 0; a < lines.length; a++) {
+			if(lines[a].equals("(")) {
+				blocks.push(new Program());
+			}
+			else if(lines[a].equals(")")) {
+				Program data = blocks.pop();
+				if(blocks.peek() == null) out.addBranchToBlock(data);
+				else blocks.peek().addBranchToBlock(data);
+			}
+			else {
+				BufferedReader br = new BufferedReader(new StringReader(convertFromUTF8(lines[a])));
+				tk = new Tokenizer(br);
+				
+				if(blocks.peek() == null) out.addCommand(parseCommand());
+				else blocks.peek().addCommand(parseCommand());
+			}
 		}
 		
 		return out;
@@ -125,20 +140,18 @@ public class Parser {
 			tk.next(); //LParen
 			BValue b = parseBValue();
 			tk.next(); //RParen
-			//TODO: Parsing the arrow here
-			Program ifBranch = parseProgram();
-			//TODO: Figure out how to parse the else branch
-			tk.next(); //RParen
-			return new IfBlock(b, ifBranch);
+			return new IfBlock(b);
+		}
+		
+		case Token.ELSE: {
+			return new ElseBlock();
 		}
 			
 		case Token.WHILE: {
 			tk.next(); //LParen
 			BValue b = parseBValue();
 			tk.next(); //RParen
-			//TODO: Parsing the arrow here
-			Program loop = parseProgram();
-			return new WhileBlock(b, loop);
+			return new WhileBlock(b);
 		}
 			
 		default:

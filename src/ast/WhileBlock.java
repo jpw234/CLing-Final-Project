@@ -2,14 +2,17 @@ package ast;
 
 import pretty.PrettyPrinter;
 
-public class WhileBlock implements Command {
+public class WhileBlock implements Command, Block {
 	
 	private BValue condition;
 	private Program content;
 
-	public WhileBlock(BValue cond, Program cont) {
+	public WhileBlock(BValue cond) {
 		condition = cond;
-		content = cont;
+	}
+	
+	public void addBranch(Program p) {
+		content = p;
 	}
 	
 	public void prettyPrint(PrettyPrinter pp) {

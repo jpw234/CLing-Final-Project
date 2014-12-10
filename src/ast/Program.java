@@ -20,6 +20,13 @@ public class Program implements Node {
 		children.add(next);
 	}
 	
+	public void addBranchToBlock(Program p) {
+		if(children.get(children.size() - 1) instanceof Block) {
+			((Block) children.get(children.size() - 1)).addBranch(p);
+		}
+		else throw new RuntimeException("tried to add branch to something that isn't a block");
+	}
+	
 	public ArrayList<Command> getChildren() {
 		return children;
 	}

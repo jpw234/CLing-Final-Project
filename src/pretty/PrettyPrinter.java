@@ -54,10 +54,11 @@ public class PrettyPrinter {
 		Program whil = new Program();
 		whil.addCommand(new Assignment(new Variable("x"), new ArithmeticOp(new Number(1, true), new Number(5, false), ArithmeticOpType.DIVIDE)));
 		whil.addCommand(new Assignment(new Variable("y"), new Number(2, true)));
-		WhileBlock wb = new WhileBlock(new Bool(true), whil);
+		WhileBlock wb = new WhileBlock(new Bool(true));
+		wb.addBranch(whil);
 		els.addCommand(wb);
-		IfBlock ifb = new IfBlock(r, then);
-		ifb.addElse(els);
+		IfBlock ifb = new IfBlock(r);
+		ifb.addBranch(then);
 		Declaration dec = new Declaration(VariableType.INT, new Variable("y"));
 		p.addCommand(dec);
 		p.addCommand(ifb);
