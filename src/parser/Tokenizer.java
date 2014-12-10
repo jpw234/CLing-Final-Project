@@ -83,7 +83,7 @@ public class Tokenizer implements Iterator<Token> {
 			c = nextChar();
 
 		//consume whitespaces
-		while (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
+		while (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == 'Â') {
 			c = nextChar();
 		}
 
@@ -100,6 +100,15 @@ public class Tokenizer implements Iterator<Token> {
 		else if (c == ',')
 			setNextToken(Token.COMMA);
 		//TODO: Add handlers for or, and, and implies (the unique characters for them)
+		else if (c == '∧')
+			setNextToken(Token.AND);
+		else if (c == '∨')
+			setNextToken(Token.OR);
+		else if (c == '¬') {
+			if(nextChar(false) != '∃') unexpected();
+			if(nextChar(false) != 'x') unexpected();
+			setNextToken(Token.NOT);
+		}
 		else if (Character.isJavaIdentifierStart(c))
 			lexIdentifier();
 		else if (Character.isDigit(c))
@@ -166,12 +175,15 @@ public class Tokenizer implements Iterator<Token> {
 			setNextToken(Token.DOUBLE);
 		else if(id.equals("bool"))
 			setNextToken(Token.BOOL);
+		else if (id.equals("string"))
+			setNextToken(Token.STRING);
 		else if(id.equals("True"))
 			setNextToken(Token.TRUE);
 		else if(id.equals("False"))
 			setNextToken(Token.FALSE);
 		else if(id.equals("not"))
 			setNextToken(Token.NOT);
+		//#TODO: Add support for changed ints/variables/doubles/strings
 		else if(id.charAt(0) == 'N' && id.length() > 1) {//then it's a number
 			try {
 				String numString = id.substring(1);

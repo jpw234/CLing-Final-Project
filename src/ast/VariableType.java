@@ -3,7 +3,7 @@ package ast;
 import pretty.PrettyPrinter;
 
 public enum VariableType {
-	INT, DOUBLE, BOOL ;//More to come...
+	INT, DOUBLE, BOOL, STRING;//More to come...
 
 	public void prettyPrint(PrettyPrinter pp){
 		switch(this) {
@@ -15,6 +15,9 @@ public enum VariableType {
 			break;
 		case BOOL:
 			pp.sb.append("boolean ");
+			break;
+		case STRING:
+			pp.sb.append("string ");
 			break;
 		}
 	}

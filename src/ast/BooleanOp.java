@@ -20,8 +20,15 @@ public class BooleanOp extends BValue {
 	}
 	
 	public void prettyPrint(PrettyPrinter pp) {
-		lValue.prettyPrint(pp);
-		type.prettyPrint(pp);
-		rValue.prettyPrint(pp);
+		if(type == BooleanOpType.NOT) {
+			pp.sb.append("!( ");
+			lValue.prettyPrint(pp);
+			pp.sb.append(") ");
+		}
+		else {
+			lValue.prettyPrint(pp);
+			type.prettyPrint(pp);
+			rValue.prettyPrint(pp);
+		}
 	}
 }

@@ -4,6 +4,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import ast.*;
 
+/* STUFF TO ASK JANE ABOUT:
+ * Representations of if and while
+ * Representation of Declare syntax (is that int(x), double(x), bool(x), string(x)?) - DONE
+ * return statement? Add that to grammar? - DONE
+ * Strings
+ * What are the characters that are outputted for "and" and "or" and "not" so i can add them to tokenizer - DONE
+ * how will the passing of variable/string/numbers affect this parser? - this affects point, number/hundred/thousand/etc.
+ */
+
+//FILES TO UPDATE ON LATEST PATCH: ast/VariableType, Parser, Token, Tokenizer, BooleanOp
+
+/* Input assumed to be an array of strings, 3 hashmaps for ints/doubles/strings
+ * elements are either lambda calc outputs or open/close parens for block structure
+ * 
+ */
+
 public class Parser {
 	Tokenizer tk;
 	BufferedReader inp;
@@ -41,28 +57,40 @@ public class Parser {
 			tk.next(); //This should be an RParen
 			return new PrintCommand(val);
 		}
-			
-		case Token.DECLARE: {
+		
+		case Token.INT: {
 			tk.next(); //LParen
-			Token varType = tk.next();
-			VariableType t;
-			switch(varType.getType()) {
-			case Token.INT:
-				t = VariableType.INT;
-				break;
-			case Token.DOUBLE:
-				t = VariableType.DOUBLE;
-				break;
-			case Token.BOOL:
-				t = VariableType.BOOL;
-				break;
-			default:
-				return null;
-			}
-			tk.next(); //Comma
 			Variable var = parseVariable();
 			tk.next(); //RParen
-			return new Declaration(t, var);
+			return new Declaration(VariableType.INT, var);
+		}
+
+		case Token.DOUBLE: {
+			tk.next(); //LParen
+			Variable var = parseVariable();
+			tk.next(); //RParen
+			return new Declaration(VariableType.DOUBLE, var);
+		}
+		
+		case Token.BOOL: {
+			tk.next(); //LParen
+			Variable var = parseVariable();
+			tk.next(); //RParen
+			return new Declaration(VariableType.BOOL, var);
+		}
+		
+		case Token.STRING: {
+			tk.next(); //LParen
+			Variable var = parseVariable();
+			tk.next(); //RParen
+			return new Declaration(VariableType.STRING, var);
+		}
+		
+		case Token.RETURN: {
+			tk.next(); //LParen
+			Value val = parseValue();
+			tk.next(); //RParen
+			return new ReturnStatement(val);
 		}
 			
 		case Token.IF: {
@@ -133,9 +161,9 @@ public class Parser {
 		case Token.VAR: 
 			ret = new Variable(((VarToken) next).getName());
 		case Token.NOT:
-			tk.next(); //LParen
+			tk.next(); //LBracket
 			BValue operand = parseBValue();
-			tk.next(); //RParen
+			tk.next(); //RBracket
 			ret = new BooleanOp(BooleanOpType.NOT, operand);
 			break;
 		case Token.LESS: {

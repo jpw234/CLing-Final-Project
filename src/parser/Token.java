@@ -8,7 +8,7 @@ public class Token {
 	 * or(the upside-down carat), and(the carat), not, implies(the arrow)
 	 * negative, point
 	 * hundred, thousand, million, billion, number
-	 * int, double, bool
+	 * int, double, bool, string
 	 * constant, variable, True, False
 	 * lparen, rparen, lbracket, rbracket
 	 */
@@ -56,6 +56,7 @@ public class Token {
 	public static final int INT = 41;
 	public static final int DOUBLE = 42;
 	public static final int BOOL = 43;
+	public static final int STRING = 44;
 	
 	//Literals between 51 and 60
 	public static final int NUM = 51;
