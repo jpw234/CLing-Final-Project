@@ -380,9 +380,11 @@ public class TreeParser {
 		String tmpcombined = "";
 		int parenscnt = 0;
 		int ifcnt = 0;
+		boolean haveif_while = false;
 		for(int i=1; i<tmp.length; i++){
 			if(tmp[i-1].equals("if") || tmp[i-1].equals("while")){
 				ifcnt++;
+				haveif_while = true;
 				result = result + " " + tmp[i-1];
 			} else if(tmp[i].equals("else") || tmp[i].equals("otherwise")){
 				String tmpelse = " else";
@@ -407,7 +409,7 @@ public class TreeParser {
 						result = result + " " + tmp[i-1] + " (";
 						parenscnt++;
 						ifcnt--;
-					} else if (tmp[i].equals("if") || tmp[i].equals("while")){
+					} else if ((tmp[i].equals("if") || tmp[i].equals("while")) && haveif_while){
 						result = result + " " + tmp[i-1] + " ( " + tmp[i];
 						parenscnt++;
 						i++;
