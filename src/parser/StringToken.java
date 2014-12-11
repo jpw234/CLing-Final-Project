@@ -8,7 +8,7 @@ public class StringToken extends Token{
 		index = val;
 	}
 	
-	public double getIndex() {
+	public int getIndex() {
 		return index;
 	}
 }
