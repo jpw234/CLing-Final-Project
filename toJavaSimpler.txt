@@ -30,17 +30,17 @@ use rule lambda abstraction
 
 #simple (int operation int)
 define set: LxLy[assign(x,y)]
-define multiply: LxLy[multiply(x,y)]
+define multiply: LxLy[assign(x,multiply(x,y))]
 define times: LxLy[multiply(x,y)] 
-define divide: LxLy[divide(x,y)]
+define divide: LxLy[assign(x,divide(x,y))]
 define divided: LxLy[divide(x,y)]
 define twice: Lx [multiply(two,x)]
-#for add one to x so 1+x
-define add:LxLy[add(x,y)]
+#for add one to x so x=1+x 
+define add:LxLy[assign(y,add(x,y))]
 #for set x to y plus z so x= y+z
 define plus: LxLy [add(x,y)]
 # subtract 3 from y so y-3 
-define subtract: LxLy [subtract(y,x)]
+define subtract: LxLy [assign(y,subtract(y,x))]
 #ex: set x to x minus y  if tree is [x [[minus][y]]]--> also similar situation in point(x,y)
 #where i assume a different parse, in the future may be better to choose 1 kind of parse and stick to it
 #note then will have to rewrite definition for either minus or point
@@ -55,8 +55,8 @@ define remainder: Lp[mod(p)]
 define modulo: LyLx[mod(x,y)]
 
 #add or subtract 1 to/from integers only
-define increment: Lx[add(one,x)]
-define decrement: Lx[subtract(x,one)]
+define increment: Lx[assign(x,add(one,x))]
+define decrement: Lx[assign(x,subtract(x,one))]
 
 #assignment like x=12*31 or
 define set-t:LxLp[assign(x,p)]
@@ -70,9 +70,9 @@ define set-t:LxLp[assign(x,p)]
 #allow more than 1 operation at a time
 
 #(int operation complex)
-define multiply-et: LxLp[multiply(x,p)]
+define multiply-et: LxLp[assign(x,multiply(x,p))]
 define times-et: LxLp[multiply(x,p)] 
-define divide-et:LxLp[divide(x,p)]
+define divide-et:LxLp[assign(x,divide(x,p))]
 define divided-et:LxLp[divide(x,p)]
 define add-et:LxLp[add(x,p)]
 #for set x to y plus z so x=y+z
@@ -91,10 +91,10 @@ define multiply-te: LpLx[multiply(p,x)]
 define times-te: LpLx[multiply(p,x)] 
 define divide-te:LpLx[divide(p,x)]
 define divided-te:LpLx[divide(p,x)]
-define add-te:LpLx[add(p,x)]
+define add-te:LpLx[assign(x,add(p,x))]
 define plus-te: LpLx[add(p,x)]
 #subtract p from x  (x-p)
-define subtract-te:LpLx[subtract(x,p)]
+define subtract-te:LpLx[assign(x,subtract(x,p))]
 #p - x
 define minus-te:LpLx[subtract(p,x)]
 #x is [greater than p]
