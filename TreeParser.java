@@ -513,9 +513,9 @@ public class TreeParser {
 		String[] tmp = str.split("\\s+");
 		String[] comparator = new String[]{"greater", "equal", "less", "more"};
 		String[] unary_ops = new String[]{"twice", "not", "negative", "print", "return", "increment", "decrement","integer","boolean","double","string","declare"};
-		String[] short_ops = new String[]{"times", "plus", "minus", "modulo", "mod"};
-		String[] long_ops = new String[]{"remainder","multiply", "add", "subtract", "divide"};
-		String[] passive_ops = new String[]{"multiplied", "divided", "added", "subtracted"};
+		String[] short_ops = new String[]{"plus", "minus","times", "modulo", "mod"};
+		String[] long_ops = new String[]{"add", "subtract","remainder","multiply", "divide"};
+		String[] passive_ops = new String[]{"added", "subtracted","multiplied", "divided"};
 		int comparator_i = lists_search(tmp, comparator);
 		int ops_long_i = lists_search(tmp, long_ops);
 		int ops_short_i = lists_search(tmp, short_ops);
@@ -627,7 +627,7 @@ public class TreeParser {
 	
 	public static String ops_short(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"times", "plus", "minus", "modulo", "mod"};
+		String[] ops = new String[]{"plus", "minus","mod","times", "modulo"};
 		int op_i = lists_search(tmp, ops);
 		if(op_i > -1 && tmp.length > op_i + 1){
 			return "[" + recbracket(recombine(tmp," ",0,op_i)) + " [["+ tmp[op_i] + "] " + recbracket(recombine(tmp," ", op_i+1, tmp.length)) + "]]";
@@ -640,7 +640,7 @@ public class TreeParser {
 	
 	public static String ops_long(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"remainder","multiply", "add", "subtract", "divide"};
+		String[] ops = new String[]{"add", "subtract","remainder","multiply","divide"};
 		String[] cmpwords = new String[]{"of","by", "to", "from"};
 		int op_i = lists_search(tmp, ops);
 		int word_i = lists_search(tmp, cmpwords);
@@ -657,7 +657,7 @@ public class TreeParser {
 	
 	public static String passive_ops(String str){
 		String[] tmp = str.split("\\s+");
-		String[] ops = new String[]{"multiplied", "divided", "added", "subtracted"};
+		String[] ops = new String[]{"added", "subtracted", "multiplied", "divided"};
 		String[] cmpwords = new String[]{"by", "to", "from"};
 		int op_i = lists_search(tmp, ops);
 		int word_i = lists_search(tmp, cmpwords);
