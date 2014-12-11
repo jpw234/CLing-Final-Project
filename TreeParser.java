@@ -42,6 +42,8 @@ public class TreeParser {
 				storeStrings(totaloutput);
 				//tag words with types
 				addTags(totaloutput);
+				integers.put("one",1);
+				integers.put("two",2);
 				System.out.println(totaloutput);
 			}
 			next = input.nextLine();
